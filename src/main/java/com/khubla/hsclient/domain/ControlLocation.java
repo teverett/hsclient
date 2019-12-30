@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.*;
 
 public class ControlLocation {
 	@JsonProperty("Row")
-	private String row;
+	private Integer row;
 	@JsonProperty("Column")
-	private String rolumn;
+	private Integer rolumn;
 	@JsonProperty("ColumnSpan")
-	private String columnSpan;
+	private Integer columnSpan;
 
-	public String getColumnSpan() {
+	public Integer getColumnSpan() {
 		return columnSpan;
 	}
 
-	public String getRolumn() {
+	public Integer getRolumn() {
 		return rolumn;
 	}
 
-	public String getRow() {
+	public Integer getRow() {
 		return row;
 	}
 
-	public void setColumnSpan(String columnSpan) {
+	public void setColumnSpan(Integer columnSpan) {
 		this.columnSpan = columnSpan;
 	}
 
-	public void setRolumn(String rolumn) {
+	public void setRolumn(Integer rolumn) {
 		this.rolumn = rolumn;
 	}
 
-	public void setRow(String row) {
+	public void setRow(Integer row) {
 		this.row = row;
 	}
 }

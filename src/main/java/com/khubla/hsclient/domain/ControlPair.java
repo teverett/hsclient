@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 public class ControlPair {
 	@JsonProperty("Do_Update")
-	private String do_Update;
+	private Boolean do_Update;
 	@JsonProperty("SingleRangeEntry")
 	private String singleRangeEntry;
 	@JsonProperty("ControlButtonType")
@@ -13,8 +13,6 @@ public class ControlPair {
 	private String controlButtonCustom;
 	@JsonProperty("CCIndex")
 	private String cCIndex;
-	@JsonProperty("Range")
-	private String range;
 	@JsonProperty("Ref")
 	private String ref;
 	@JsonProperty("Label")
@@ -41,6 +39,8 @@ public class ControlPair {
 	private String controlFlag;
 	@JsonProperty("ControlLocation")
 	private ControlLocation controlLocation;
+	@JsonProperty("Range")
+	private Range range;
 
 	public String getcCIndex() {
 		return cCIndex;
@@ -98,7 +98,7 @@ public class ControlPair {
 		return controlValue;
 	}
 
-	public String getDo_Update() {
+	public Boolean getDo_Update() {
 		return do_Update;
 	}
 
@@ -106,7 +106,7 @@ public class ControlPair {
 		return label;
 	}
 
-	public String getRange() {
+	public Range getRange() {
 		return range;
 	}
 
@@ -174,7 +174,7 @@ public class ControlPair {
 		this.controlValue = controlValue;
 	}
 
-	public void setDo_Update(String do_Update) {
+	public void setDo_Update(Boolean do_Update) {
 		this.do_Update = do_Update;
 	}
 
@@ -182,7 +182,7 @@ public class ControlPair {
 		this.label = label;
 	}
 
-	public void setRange(String range) {
+	public void setRange(Range range) {
 		this.range = range;
 	}
 

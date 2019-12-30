@@ -9,7 +9,6 @@ import com.khubla.hsclient.response.*;
 
 public class TestControl {
 	@Test
-	@Ignore
 	public void testControl() {
 		try {
 			InputStream is = TestControl.class.getResourceAsStream("/getcontrol.json");
