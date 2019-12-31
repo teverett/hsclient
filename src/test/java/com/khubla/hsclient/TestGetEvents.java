@@ -4,14 +4,17 @@ import org.junit.*;
 
 import com.khubla.hsclient.response.*;
 
-public class TestGetControl extends AbstractTest {
+/**
+ * @author tom
+ */
+public class TestGetEvents extends AbstractTest {
 	@Test
-	public void testGetControl() {
+	public void testGetLocations() {
 		try {
 			final HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final ControlResponse controlResponse = hsClient.getControl(null);
-			Assert.assertNotNull(controlResponse);
+			final EventsResponse eventsResponse = hsClient.getEvents();
+			Assert.assertNotNull(eventsResponse);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();

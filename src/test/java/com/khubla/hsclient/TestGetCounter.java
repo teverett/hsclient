@@ -4,14 +4,20 @@ import org.junit.*;
 
 import com.khubla.hsclient.response.*;
 
-public class TestGetControl extends AbstractTest {
+/**
+ * test ignored: not every HS3 has a counter named "test"
+ *
+ * @author tom
+ */
+public class TestGetCounter extends AbstractTest {
 	@Test
-	public void testGetControl() {
+	@Ignore
+	public void testGetCounter() {
 		try {
 			final HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final ControlResponse controlResponse = hsClient.getControl(null);
-			Assert.assertNotNull(controlResponse);
+			final CountersResponse countersResponse = hsClient.getCounter("test");
+			Assert.assertNotNull(countersResponse);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();

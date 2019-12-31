@@ -75,17 +75,14 @@ public class HSClientImpl implements HSClient {
 		try {
 			final URIBuilder builder = new URIBuilder(url);
 			builder.setParameter(USER, username).setParameter(PASS, password).addParameter(REQUEST, command);
-			for (final String k : parameters.keySet()) {
-				builder.setParameter(k, parameters.get(k));
+			if (null != parameters) {
+				for (final String k : parameters.keySet()) {
+					builder.setParameter(k, parameters.get(k));
+				}
 			}
 			final HttpGet request = new HttpGet(builder.build());
-			System.out.println(request.getURI().toString());
 			final CloseableHttpResponse response = httpClient.execute(request);
 			try {
-				System.out.println(response.getProtocolVersion());
-				System.out.println(response.getStatusLine().getStatusCode());
-				System.out.println(response.getStatusLine().getReasonPhrase());
-				System.out.println(response.getStatusLine().toString());
 				final HttpEntity entity = response.getEntity();
 				if (entity != null) {
 					return EntityUtils.toString(entity);
@@ -115,13 +112,12 @@ public class HSClientImpl implements HSClient {
 		return ControlResponse.parse(json);
 	}
 
-	// TODO Auto-generated method stub
 	@Override
-	public Integer getCounter(String counter) throws HSClientException {
+	public CountersResponse getCounter(String counter) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("counter", counter);
-		executeGETQuery("getcounter", parameters);
-		return 0;
+		final String json = executeGETQuery("getcounter", parameters);
+		return CountersResponse.parse(json);
 	}
 
 	@Override
@@ -134,10 +130,10 @@ public class HSClientImpl implements HSClient {
 		return httpClient;
 	}
 
-	// TODO Auto-generated method stub
 	@Override
-	public void getLocations() throws HSClientException {
-		executeGETQuery("getlocations", null);
+	public LocationsResponse getLocations() throws HSClientException {
+		final String json = executeGETQuery("getlocations", null);
+		return LocationsResponse.parse(json);
 	}
 
 	public String getPassword() {

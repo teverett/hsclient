@@ -8,11 +8,11 @@ public class TestGetStatus extends AbstractTest {
 	@Test
 	public void testGetStatus() {
 		try {
-			HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
+			final HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			StatusResponse statusResponse = hsClient.getStatus(null, null, null);
+			final StatusResponse statusResponse = hsClient.getStatus(null, null, null);
 			Assert.assertNotNull(statusResponse);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}

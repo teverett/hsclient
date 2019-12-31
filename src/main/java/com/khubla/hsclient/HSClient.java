@@ -10,11 +10,11 @@ public interface HSClient {
 
 	ControlResponse getControl(Integer ref) throws HSClientException;
 
-	Integer getCounter(String counter) throws HSClientException;
+	CountersResponse getCounter(String counter) throws HSClientException;
 
 	EventsResponse getEvents() throws HSClientException;
 
-	void getLocations() throws HSClientException;
+	LocationsResponse getLocations() throws HSClientException;
 
 	SettingResponse getSetting(String setting) throws HSClientException;
 
