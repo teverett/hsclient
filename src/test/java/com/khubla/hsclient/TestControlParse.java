@@ -7,15 +7,16 @@ import org.junit.*;
 
 import com.khubla.hsclient.response.*;
 
-public class TestControl {
+public class TestControlParse {
 	@Test
-	public void testControl() {
+	public void testControlParse() {
 		try {
-			InputStream is = TestControl.class.getResourceAsStream("/getcontrol.json");
+			InputStream is = TestControlParse.class.getResourceAsStream("/getcontrol.json");
 			StringWriter writer = new StringWriter();
 			IOUtils.copy(is, writer, "UTF-8");
 			String json = writer.toString();
 			ControlResponse controlResponse = ControlResponse.parse(json);
+			Assert.assertNotNull(controlResponse);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

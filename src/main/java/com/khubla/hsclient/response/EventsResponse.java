@@ -7,11 +7,11 @@ import com.fasterxml.jackson.databind.*;
 import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 
-public class StatusResponse {
-	public static StatusResponse parse(String json) throws HSClientException {
+public class EventsResponse {
+	public static EventsResponse parse(String json) throws HSClientException {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
-			return mapper.readValue(json, StatusResponse.class);
+			return mapper.readValue(json, EventsResponse.class);
 		} catch (final Exception e) {
 			throw new HSClientException(e);
 		}
@@ -21,11 +21,11 @@ public class StatusResponse {
 	private String name;
 	@JsonProperty("Version")
 	private String version;
-	@JsonProperty("Devices")
-	private List<Device> devices;
+	@JsonProperty("Events")
+	private List<Event> events;
 
-	public List<Device> getDevices() {
-		return devices;
+	public List<Event> getEvents() {
+		return events;
 	}
 
 	public String getName() {
@@ -36,8 +36,8 @@ public class StatusResponse {
 		return version;
 	}
 
-	public void setDevices(List<Device> devices) {
-		this.devices = devices;
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	public void setName(String name) {

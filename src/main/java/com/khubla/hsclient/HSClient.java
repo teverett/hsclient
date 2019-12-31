@@ -1,110 +1,28 @@
 package com.khubla.hsclient;
 
-import java.io.*;
-import java.net.*;
-
-import org.apache.http.*;
-import org.apache.http.client.methods.*;
-import org.apache.http.client.utils.*;
-import org.apache.http.impl.client.*;
-import org.apache.http.util.*;
-
+import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.response.*;
 
-public class HSClient {
-	/**
-	 * user
-	 */
-	private static final String USER = "user";
-	/**
-	 * pass
-	 */
-	private static final String PASS = "pass";
-	/**
-	 * request
-	 */
-	private static final String REQUEST = "request";
+public interface HSClient {
+	Device controlDeviceByLabel(String label, String value) throws HSClientException;
 
-	public static HSClient connect(String url, String username, String password) {
-		return new HSClient(url, username, password);
-	}
+	Device controlDeviceByValue(Integer ref, String value) throws HSClientException;
 
-	/**
-	 * HS URL
-	 */
-	private final String url;
-	/**
-	 * HS Username
-	 */
-	private final String username;
-	/**
-	 * HS Password
-	 */
-	private final String password;
-	/**
-	 * HTTP Client
-	 */
-	private CloseableHttpClient httpClient = HttpClients.createDefault();
+	ControlResponse getControl(Integer ref) throws HSClientException;
 
-	private HSClient(String url, String username, String pasword) {
-		super();
-		this.url = url;
-		this.username = username;
-		password = pasword;
-	}
+	Integer getCounter(String counter) throws HSClientException;
 
-	private String executeGETQuery(String command) throws ParseException, IOException, URISyntaxException {
-		try {
-			final URIBuilder builder = new URIBuilder(url);
-			builder.setParameter(USER, username).setParameter(PASS, password).addParameter(REQUEST, command);
-			final HttpGet request = new HttpGet(builder.build());
-			System.out.println(request.getURI().toString());
-			final CloseableHttpResponse response = httpClient.execute(request);
-			try {
-				System.out.println(response.getProtocolVersion());
-				System.out.println(response.getStatusLine().getStatusCode());
-				System.out.println(response.getStatusLine().getReasonPhrase());
-				System.out.println(response.getStatusLine().toString());
-				final HttpEntity entity = response.getEntity();
-				if (entity != null) {
-					return EntityUtils.toString(entity);
-				}
-			} finally {
-				response.close();
-			}
-		} finally {
-			httpClient.close();
-		}
-		return null;
-	}
+	EventsResponse getEvents() throws HSClientException;
 
-	public ControlResponse getControl() throws IOException, URISyntaxException {
-		final String json = executeGETQuery("getcontrol");
-		return ControlResponse.parse(json);
-	}
+	void getLocations() throws HSClientException;
 
-	public CloseableHttpClient getHttpClient() {
-		return httpClient;
-	}
+	SettingResponse getSetting(String setting) throws HSClientException;
 
-	public String getPassword() {
-		return password;
-	}
+	StatusResponse getStatus(Integer ref, String location1, String location2) throws HSClientException;
 
-	public StatusResponse getStatus() throws IOException, URISyntaxException {
-		final String json = executeGETQuery("getstatus");
-		return StatusResponse.parse(json);
-	}
+	void runEvent(String eventid) throws HSClientException;
 
-	public String getUrl() {
-		return url;
-	}
+	void runEvent(String group, String eventname) throws HSClientException;
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setHttpClient(CloseableHttpClient httpClient) {
-		this.httpClient = httpClient;
-	}
+	void speak(String phrase, String host) throws HSClientException;
 }

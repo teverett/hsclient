@@ -1,28 +1,34 @@
 package com.khubla.hsclient.response;
 
-import java.io.*;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 
 public class ControlResponse {
-	public static ControlResponse parse(String json) throws JsonParseException, JsonMappingException, IOException {
-		final ObjectMapper mapper = new ObjectMapper();
-		return mapper.readValue(json, ControlResponse.class);
+	public static ControlResponse parse(String json) throws HSClientException {
+		try {
+			final ObjectMapper mapper = new ObjectMapper();
+			return mapper.readValue(json, ControlResponse.class);
+		} catch (final Exception e) {
+			throw new HSClientException(e);
+		}
 	}
 
 	private String ref;
+	@JsonProperty("Name")
 	private String name;
+	@JsonProperty("Version")
+	private String version;
 	private String location;
 	private String location2;
-	@JsonProperty("ControlPairs")
-	private List<ControlPair> controlPairs;
+	@JsonProperty("Devices")
+	private List<Device> devices;
 
-	public List<ControlPair> getControlPairs() {
-		return controlPairs;
+	public List<Device> getDevices() {
+		return devices;
 	}
 
 	public String getLocation() {
@@ -41,8 +47,12 @@ public class ControlResponse {
 		return ref;
 	}
 
-	public void setControlPairs(List<ControlPair> controlPairs) {
-		this.controlPairs = controlPairs;
+	public String getVersion() {
+		return version;
+	}
+
+	public void setDevices(List<Device> devices) {
+		this.devices = devices;
 	}
 
 	public void setLocation(String location) {
@@ -59,5 +69,9 @@ public class ControlResponse {
 
 	public void setRef(String ref) {
 		this.ref = ref;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }
