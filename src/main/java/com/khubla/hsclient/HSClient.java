@@ -1,5 +1,7 @@
 package com.khubla.hsclient;
 
+import java.util.*;
+
 import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.response.*;
 
@@ -11,6 +13,10 @@ public interface HSClient {
 	ControlResponse getControl(Integer ref) throws HSClientException;
 
 	CountersResponse getCounter(String counter) throws HSClientException;
+
+	Map<String, Device> getDevicesByName() throws HSClientException;
+
+	Map<Integer, Device> getDevicesByRef() throws HSClientException;
 
 	EventsResponse getEvents() throws HSClientException;
 

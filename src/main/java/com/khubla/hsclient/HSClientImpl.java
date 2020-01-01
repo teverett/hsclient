@@ -1,5 +1,6 @@
 package com.khubla.hsclient;
 
+import java.io.*;
 import java.util.*;
 
 import org.apache.http.*;
@@ -11,7 +12,7 @@ import org.apache.http.util.*;
 import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.response.*;
 
-public class HSClientImpl implements HSClient {
+public class HSClientImpl implements HSClient, Closeable {
 	/**
 	 * user
 	 */
@@ -54,6 +55,11 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public void close() throws IOException {
+		httpClient.close();
+	}
+
+	@Override
 	public Device controlDeviceByLabel(String label, String value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("label", label);
@@ -92,12 +98,6 @@ public class HSClientImpl implements HSClient {
 			}
 		} catch (final Exception e) {
 			throw new HSClientException("Exception running command '+command+'", e);
-		} finally {
-			try {
-				httpClient.close();
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
 		}
 		return null;
 	}
@@ -118,6 +118,32 @@ public class HSClientImpl implements HSClient {
 		parameters.put("counter", counter);
 		final String json = executeGETQuery("getcounter", parameters);
 		return CountersResponse.parse(json);
+	}
+
+	/**
+	 * produce a map of devices by name
+	 */
+	@Override
+	public Map<String, Device> getDevicesByName() throws HSClientException {
+		final StatusResponse statusResponse = getStatus(null, null, null);
+		final Map<String, Device> ret = new HashMap<String, Device>();
+		for (final Device device : statusResponse.getDevices()) {
+			ret.put(device.getName(), device);
+		}
+		return ret;
+	}
+
+	/**
+	 * produce a map of devices by ref
+	 */
+	@Override
+	public Map<Integer, Device> getDevicesByRef() throws HSClientException {
+		final StatusResponse statusResponse = getStatus(null, null, null);
+		final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+		for (final Device device : statusResponse.getDevices()) {
+			ret.put(device.getRef(), device);
+		}
+		return ret;
 	}
 
 	@Override
