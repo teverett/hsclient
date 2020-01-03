@@ -15,6 +15,14 @@ public class DeviceUtil {
 		refresh();
 	}
 
+	public Map<String, Device> getDeviceMapByName() {
+		return deviceMapByName;
+	}
+
+	public Map<Integer, Device> getDeviceMapByRef() {
+		return deviceMapByRef;
+	}
+
 	/**
 	 * get all devices of type deviceType
 	 *
