@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.annotation.*;
 import com.khubla.hsclient.*;
 
 public class Device {
@@ -20,10 +21,11 @@ public class Device {
 	private String location;
 	private String name;
 	private String location2;
-	private Integer value;
+	private Double value;
 	private String status;
 	private String device_type_string;
-	private String last_change;
+	@JsonDeserialize(converter = DateConverter.class)
+	private Date last_change;
 	private Integer relationship;
 	private String hide_from_view;
 	private List<Integer> associated_devices = new ArrayList<Integer>();
@@ -73,7 +75,7 @@ public class Device {
 		return interface_name;
 	}
 
-	public String getLast_change() {
+	public Date getLast_change() {
 		return last_change;
 	}
 
@@ -117,7 +119,7 @@ public class Device {
 		return userNote;
 	}
 
-	public Integer getValue() {
+	public Double getValue() {
 		return value;
 	}
 
@@ -157,7 +159,7 @@ public class Device {
 		this.interface_name = interface_name;
 	}
 
-	public void setLast_change(String last_change) {
+	public void setLast_change(Date last_change) {
 		this.last_change = last_change;
 	}
 
@@ -201,7 +203,7 @@ public class Device {
 		this.userNote = userNote;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 
