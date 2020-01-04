@@ -12,7 +12,7 @@ import org.apache.http.util.*;
 import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.response.*;
 
-public class HSClientImpl implements HSClient, Closeable {
+public class HSClientImpl implements HSClient {
 	/**
 	 * user
 	 */

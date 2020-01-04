@@ -1,11 +1,12 @@
 package com.khubla.hsclient;
 
+import java.io.*;
 import java.util.*;
 
 import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.response.*;
 
-public interface HSClient {
+public interface HSClient extends Closeable {
 	Device controlDeviceByLabel(String label, String value) throws HSClientException;
 
 	Device controlDeviceByValue(Integer ref, String value) throws HSClientException;
