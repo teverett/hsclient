@@ -172,4 +172,9 @@ public class HSClientImpl implements HSClient {
 	public void runEvent(String group, String name) throws HSClientException {
 		hsJSONClient.runEvent(group, name);
 	}
+
+	@Override
+	public void speak(String phrase, String host) throws HSClientException {
+		hsJSONClient.speak(phrase, host);
+	}
 }

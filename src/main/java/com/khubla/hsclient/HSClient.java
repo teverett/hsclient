@@ -139,4 +139,13 @@ public interface HSClient extends Closeable {
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	void runEvent(String group, String name) throws HSClientException;
+
+	/**
+	 * speak a phrase
+	 *
+	 * @param phrase phrase to speak
+	 * @param host host to speak on
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 */
+	public void speak(String phrase, String host) throws HSClientException;
 }
