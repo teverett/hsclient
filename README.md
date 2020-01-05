@@ -14,6 +14,18 @@ License
 
 hsclient is distributed under the BSD 3-Clause License.
 
+Maven coordinates
+-------------------
+
+```
+<dependency>
+   <groupId>com.khubla.hsclient</groupId>
+   <artifactId>hsclient</artifactId>
+   <version>1.0.0</version>
+</dependency>
+```
+
+
 Usage
 -------------------
 
