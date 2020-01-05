@@ -32,4 +32,21 @@ public class TestGetDevices extends AbstractTest {
 			Assert.fail();
 		}
 	}
+
+	@Test
+	@Ignore
+	public void testShowDevices() {
+		try {
+			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+			Assert.assertNotNull(hsClient);
+			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
+			Assert.assertNotNull(devices);
+			for (Device device : devices.values()) {
+				System.out.println(device.getName() + ": " + device.getDevice_type().getDevice_Type() + " : " + device.getDevice_type().getDevice_Type_Description());
+			}
+		} catch (final Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
 }

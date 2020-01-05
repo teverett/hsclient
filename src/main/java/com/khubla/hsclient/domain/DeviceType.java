@@ -16,24 +16,48 @@ public class DeviceType {
 	@JsonProperty("Device_SubType_Description")
 	private String device_SubType_Description;
 
+	public Integer getDevice_API() {
+		return device_API;
+	}
+
 	public String getDevice_API_Description() {
 		return device_API_Description;
+	}
+
+	public Integer getDevice_SubType() {
+		return device_SubType;
 	}
 
 	public String getDevice_SubType_Description() {
 		return device_SubType_Description;
 	}
 
+	public Integer getDevice_Type() {
+		return device_Type;
+	}
+
 	public String getDevice_Type_Description() {
 		return device_Type_Description;
+	}
+
+	public void setDevice_API(Integer device_API) {
+		this.device_API = device_API;
 	}
 
 	public void setDevice_API_Description(String device_API_Description) {
 		this.device_API_Description = device_API_Description;
 	}
 
+	public void setDevice_SubType(Integer device_SubType) {
+		this.device_SubType = device_SubType;
+	}
+
 	public void setDevice_SubType_Description(String device_SubType_Description) {
 		this.device_SubType_Description = device_SubType_Description;
+	}
+
+	public void setDevice_Type(Integer device_Type) {
+		this.device_Type = device_Type;
 	}
 
 	public void setDevice_Type_Description(String device_Type_Description) {
