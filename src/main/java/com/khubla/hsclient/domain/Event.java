@@ -8,7 +8,7 @@ public class Event {
 	@JsonProperty("Name")
 	private String name;
 	@JsonProperty("id")
-	private String id;
+	private Integer id;
 	@JsonProperty("voice_command")
 	private String voice_command;
 	@JsonProperty("voice_command_enabled")
@@ -18,7 +18,7 @@ public class Event {
 		return group;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -38,7 +38,7 @@ public class Event {
 		this.group = group;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -6,13 +6,13 @@ public class Counter {
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("value")
-	private String value;
+	private Integer value;
 
 	public String getName() {
 		return name;
 	}
 
-	public String getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
@@ -20,7 +20,7 @@ public class Counter {
 		this.name = name;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Integer value) {
 		this.value = value;
 	}
 }

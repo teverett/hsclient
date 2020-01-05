@@ -1,8 +1,8 @@
 package com.khubla.hsclient;
 
-import org.junit.*;
+import java.util.*;
 
-import com.khubla.hsclient.response.*;
+import org.junit.*;
 
 /**
  * @author tom
@@ -11,10 +11,10 @@ public class TestGetLocations extends AbstractTest {
 	@Test
 	public void testGetLocations() {
 		try {
-			final HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
+			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final LocationsResponse locationsResponse = hsClient.getLocations();
-			Assert.assertNotNull(locationsResponse);
+			final List<String> locationNames = hsClient.getLocations();
+			Assert.assertNotNull(locationNames);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();

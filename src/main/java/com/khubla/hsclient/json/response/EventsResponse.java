@@ -1,19 +1,19 @@
-package com.khubla.hsclient.response;
+package com.khubla.hsclient.json.response;
 
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
-import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
+import com.khubla.hsclient.json.*;
 
-public class CountersResponse {
-	public static CountersResponse parse(String json) throws HSClientException {
+public class EventsResponse {
+	public static EventsResponse parse(String json) throws HSJSONClientException {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
-			return mapper.readValue(json, CountersResponse.class);
+			return mapper.readValue(json, EventsResponse.class);
 		} catch (final Exception e) {
-			throw new HSClientException(e);
+			throw new HSJSONClientException(e);
 		}
 	}
 
@@ -21,11 +21,11 @@ public class CountersResponse {
 	private String name;
 	@JsonProperty("Version")
 	private String version;
-	@JsonProperty("Counters")
-	private List<Counter> counters;
+	@JsonProperty("Events")
+	private List<Event> events;
 
-	public List<Counter> getCounters() {
-		return counters;
+	public List<Event> getEvents() {
+		return events;
 	}
 
 	public String getName() {
@@ -36,8 +36,8 @@ public class CountersResponse {
 		return version;
 	}
 
-	public void setCounters(List<Counter> counters) {
-		this.counters = counters;
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	public void setName(String name) {

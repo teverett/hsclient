@@ -6,17 +6,14 @@ import org.junit.*;
 
 import com.khubla.hsclient.domain.*;
 
-/**
- * @author tom
- */
-public class TestGetEvents extends AbstractTest {
+public class TestGetDevices extends AbstractTest {
 	@Test
-	public void testGetEventsById() {
+	public void testGeyByName() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final Map<Integer, Event> events = hsClient.getEventsById();
-			Assert.assertNotNull(events);
+			final Map<String, Device> devices = hsClient.getDevicesByName();
+			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -24,12 +21,12 @@ public class TestGetEvents extends AbstractTest {
 	}
 
 	@Test
-	public void testGetEventsByName() {
+	public void testGetByRef() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final Map<String, Event> events = hsClient.getEventsByName();
-			Assert.assertNotNull(events);
+			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
+			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();

@@ -4,32 +4,126 @@ import java.io.*;
 import java.util.*;
 
 import com.khubla.hsclient.domain.*;
-import com.khubla.hsclient.response.*;
+import com.khubla.hsclient.json.*;
 
 public interface HSClient extends Closeable {
-	Device controlDeviceByLabel(String label, String value) throws HSClientException;
+	/**
+	 * send control command by device label
+	 *
+	 * @param label
+	 * @param value
+	 * @return
+	 * @throws HSJSONClientException
+	 */
+	Device controlDeviceByLabel(String label, String value) throws HSJSONClientException;
 
-	Device controlDeviceByValue(Integer ref, String value) throws HSClientException;
+	/**
+	 * send control command by device ref
+	 *
+	 * @param ref
+	 * @param value
+	 * @return
+	 * @throws HSJSONClientException
+	 */
+	Device controlDeviceByValue(Integer ref, String value) throws HSJSONClientException;
 
-	ControlResponse getControl(Integer ref) throws HSClientException;
+	/**
+	 * get value of counter
+	 *
+	 * @param name
+	 * @return counter
+	 * @throws HSJSONClientException
+	 */
+	Counter getCounter(String name) throws HSJSONClientException;
 
-	CountersResponse getCounter(String counter) throws HSClientException;
+	/**
+	 * get a device by ref
+	 *
+	 * @param ref
+	 * @return Device
+	 * @throws HSJSONClientException
+	 */
+	Device getDevice(Integer ref) throws HSJSONClientException;
 
-	Map<String, Device> getDevicesByName() throws HSClientException;
+	/**
+	 * get a device with controls, by ref
+	 *
+	 * @param ref
+	 * @return Device
+	 * @throws HSJSONClientException
+	 */
+	Device getDeviceControls(Integer ref) throws HSJSONClientException;
 
-	Map<Integer, Device> getDevicesByRef() throws HSClientException;
+	/**
+	 * get all devices with controls
+	 *
+	 * @return Map<String, Device>
+	 * @throws HSJSONClientException
+	 */
+	Map<String, Device> getDeviceControlsByName() throws HSJSONClientException;
 
-	EventsResponse getEvents() throws HSClientException;
+	/**
+	 * get all devices by reference id
+	 *
+	 * @return Map<Integer, Device>
+	 * @throws HSJSONClientException
+	 */
+	Map<Integer, Device> getDeviceControlsByRef() throws HSJSONClientException;
 
-	LocationsResponse getLocations() throws HSClientException;
+	/**
+	 * get all devices by name
+	 *
+	 * @return Map<String, Device>
+	 * @throws HSJSONClientException
+	 */
+	Map<String, Device> getDevicesByName() throws HSJSONClientException;
 
-	SettingResponse getSetting(String setting) throws HSClientException;
+	/**
+	 * get all devices by reference id
+	 *
+	 * @return Map<Integer, Device>
+	 * @throws HSJSONClientException
+	 */
+	Map<Integer, Device> getDevicesByRef() throws HSJSONClientException;
 
-	StatusResponse getStatus(Integer ref, String location1, String location2) throws HSClientException;
+	/**
+	 * get all events by id
+	 *
+	 * @return events by id
+	 * @throws HSJSONClientException
+	 */
+	Map<Integer, Event> getEventsById() throws HSJSONClientException;
 
-	void runEvent(String eventid) throws HSClientException;
+	/**
+	 * get all events by name
+	 *
+	 * @return events by name
+	 * @throws HSJSONClientException
+	 */
+	Map<String, Event> getEventsByName() throws HSJSONClientException;
 
-	void runEvent(String group, String eventname) throws HSClientException;
+	/**
+	 * get all locations
+	 *
+	 * @return list of location names
+	 * @throws HSJSONClientException
+	 */
+	List<String> getLocations() throws HSJSONClientException;
 
-	void speak(String phrase, String host) throws HSClientException;
+	/**
+	 * run an event by event id
+	 *
+	 * @param eventId
+	 * @throws HSJSONClientException
+	 */
+	void runEvent(Integer eventId) throws HSJSONClientException;
+
+	/**
+	 * run an event by group name and event name
+	 *
+	 * @param group
+	 * @param name
+	 * @throws HSJSONClientException
+	 */
+	void runEvent(String group, String name) throws HSJSONClientException;
 }
