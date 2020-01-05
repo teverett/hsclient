@@ -16,13 +16,26 @@ Usage
 
 Simply instantiate an [HSClient](https://github.com/teverett/hsclient/blob/master/src/main/java/com/khubla/hsclient/HSClient.java) and call the API methods
 
+To get all Devices:
+
 <pre>
-
-final HSClient hsClient = HSClientImpl.connect(URL, USERNAME, PASSWORD);
-final StatusResponse statusResponse = hsClient.getStatus(null, null, null);
-
+final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
 </pre>
 
+To get all Events:
+
+<pre>
+final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final Map<Integer, Event> allEvents = hsClient.getEventsById();
+</pre>
+
+To get a single Device:
+
+<pre>
+final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final Device device = hsClient.getDevice(DEVICEREF);
+</pre>
 
 
 
