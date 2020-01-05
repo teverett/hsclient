@@ -137,7 +137,6 @@
 						<configuration>
 							<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 							<source>8</source>
-							<failOnError>false</failOnError>
 						</configuration>
 					</plugin>
 					<plugin>
