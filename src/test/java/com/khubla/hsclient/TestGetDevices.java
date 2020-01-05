@@ -8,11 +8,11 @@ import com.khubla.hsclient.domain.*;
 
 public class TestGetDevices extends AbstractTest {
 	@Test
-	public void testGeyByName() {
+	public void testGetByRef() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final Map<String, Device> devices = hsClient.getDevicesByName();
+			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
@@ -21,11 +21,11 @@ public class TestGetDevices extends AbstractTest {
 	}
 
 	@Test
-	public void testGetByRef() {
+	public void testGeyByName() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
+			final Map<String, Device> devices = hsClient.getDevicesByName();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class TestGetDevices extends AbstractTest {
 			Assert.assertNotNull(hsClient);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
-			for (Device device : devices.values()) {
+			for (final Device device : devices.values()) {
 				System.out.println(device.getName() + ": " + device.getDevice_type().getDevice_Type() + " : " + device.getDevice_type().getDevice_Type_Description());
 			}
 		} catch (final Exception e) {
