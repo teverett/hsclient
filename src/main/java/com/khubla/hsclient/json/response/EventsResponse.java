@@ -4,16 +4,16 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
+import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
-import com.khubla.hsclient.json.*;
 
 public class EventsResponse {
-	public static EventsResponse parse(String json) throws HSJSONClientException {
+	public static EventsResponse parse(String json) throws HSClientException {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, EventsResponse.class);
 		} catch (final Exception e) {
-			throw new HSJSONClientException(e);
+			throw new HSClientException(e);
 		}
 	}
 

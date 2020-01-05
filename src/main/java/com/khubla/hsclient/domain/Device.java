@@ -5,15 +5,15 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.*;
-import com.khubla.hsclient.json.*;
+import com.khubla.hsclient.*;
 
 public class Device {
-	public static Device parse(String json) throws HSJSONClientException {
+	public static Device parse(String json) throws HSClientException {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, Device.class);
 		} catch (final Exception e) {
-			throw new HSJSONClientException(e);
+			throw new HSClientException(e);
 		}
 	}
 

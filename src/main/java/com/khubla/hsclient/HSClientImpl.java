@@ -23,17 +23,17 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Device controlDeviceByLabel(String label, String value) throws HSJSONClientException {
+	public Device controlDeviceByLabel(String label, String value) throws HSClientException {
 		return hsJSONClient.controlDeviceByLabel(label, value);
 	}
 
 	@Override
-	public Device controlDeviceByValue(Integer ref, String value) throws HSJSONClientException {
+	public Device controlDeviceByValue(Integer ref, String value) throws HSClientException {
 		return hsJSONClient.controlDeviceByValue(ref, value);
 	}
 
 	@Override
-	public Counter getCounter(String name) throws HSJSONClientException {
+	public Counter getCounter(String name) throws HSClientException {
 		final CountersResponse countersResponse = hsJSONClient.getCounter(name);
 		if (null != countersResponse) {
 			if (countersResponse.getCounters().size() > 0) {
@@ -44,7 +44,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Device getDevice(Integer ref) throws HSJSONClientException {
+	public Device getDevice(Integer ref) throws HSClientException {
 		final StatusResponse statusResponse = hsJSONClient.getStatus(ref, null, null);
 		if (null != statusResponse) {
 			return statusResponse.getDevices().get(0);
@@ -53,7 +53,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Device getDeviceControls(Integer ref) throws HSJSONClientException {
+	public Device getDeviceControls(Integer ref) throws HSClientException {
 		final ControlResponse controlResponse = hsJSONClient.getControl(null);
 		if (null != controlResponse) {
 			return controlResponse.getDevices().get(0);
@@ -62,7 +62,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<String, Device> getDeviceControlsByName() throws HSJSONClientException {
+	public Map<String, Device> getDeviceControlsByName() throws HSClientException {
 		final ControlResponse controlResponse = hsJSONClient.getControl(null);
 		if (null != controlResponse) {
 			final Map<String, Device> ret = new HashMap<String, Device>();
@@ -75,7 +75,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<Integer, Device> getDeviceControlsByRef() throws HSJSONClientException {
+	public Map<Integer, Device> getDeviceControlsByRef() throws HSClientException {
 		final ControlResponse controlResponse = hsJSONClient.getControl(null);
 		if (null != controlResponse) {
 			final Map<Integer, Device> ret = new HashMap<Integer, Device>();
@@ -88,7 +88,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<String, Device> getDevicesByName() throws HSJSONClientException {
+	public Map<String, Device> getDevicesByName() throws HSClientException {
 		final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 		if (null != statusResponse) {
 			final Map<String, Device> ret = new HashMap<String, Device>();
@@ -101,7 +101,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<Integer, Device> getDevicesByRef() throws HSJSONClientException {
+	public Map<Integer, Device> getDevicesByRef() throws HSClientException {
 		final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 		if (null != statusResponse) {
 			final Map<Integer, Device> ret = new HashMap<Integer, Device>();
@@ -114,7 +114,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<Integer, Event> getEventsById() throws HSJSONClientException {
+	public Map<Integer, Event> getEventsById() throws HSClientException {
 		final EventsResponse eventsResponse = hsJSONClient.getEvents();
 		if (null != eventsResponse) {
 			final Map<Integer, Event> ret = new HashMap<Integer, Event>();
@@ -127,7 +127,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<String, Event> getEventsByName() throws HSJSONClientException {
+	public Map<String, Event> getEventsByName() throws HSClientException {
 		final EventsResponse eventsResponse = hsJSONClient.getEvents();
 		if (null != eventsResponse) {
 			final Map<String, Event> ret = new HashMap<String, Event>();
@@ -140,7 +140,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public List<String> getLocations() throws HSJSONClientException {
+	public List<String> getLocations() throws HSClientException {
 		final LocationsResponse locationsResponse = hsJSONClient.getLocations();
 		if (null != locationsResponse) {
 			return locationsResponse.getLocation1();
@@ -149,12 +149,12 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void runEvent(Integer eventId) throws HSJSONClientException {
+	public void runEvent(Integer eventId) throws HSClientException {
 		hsJSONClient.runEvent(eventId);
 	}
 
 	@Override
-	public void runEvent(String group, String name) throws HSJSONClientException {
+	public void runEvent(String group, String name) throws HSClientException {
 		hsJSONClient.runEvent(group, name);
 	}
 }

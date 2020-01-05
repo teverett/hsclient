@@ -9,6 +9,7 @@ import org.apache.http.client.utils.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.util.*;
 
+import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.json.response.*;
 
@@ -54,7 +55,7 @@ public class HSJSONClient implements Closeable {
 		httpClient.close();
 	}
 
-	public Device controlDeviceByLabel(String label, String value) throws HSJSONClientException {
+	public Device controlDeviceByLabel(String label, String value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("label", label);
 		parameters.put("value", value);
@@ -62,7 +63,7 @@ public class HSJSONClient implements Closeable {
 		return Device.parse(json);
 	}
 
-	public Device controlDeviceByValue(Integer ref, String value) throws HSJSONClientException {
+	public Device controlDeviceByValue(Integer ref, String value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("ref", Integer.toString(ref));
 		parameters.put("value", value);
@@ -70,7 +71,7 @@ public class HSJSONClient implements Closeable {
 		return Device.parse(json);
 	}
 
-	private String executeGETQuery(String command, Map<String, String> parameters) throws HSJSONClientException {
+	private String executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
 		try {
 			final URIBuilder builder = new URIBuilder(url);
 			builder.setParameter(USER, username).setParameter(PASS, password).addParameter(REQUEST, command);
@@ -90,12 +91,12 @@ public class HSJSONClient implements Closeable {
 				response.close();
 			}
 		} catch (final Exception e) {
-			throw new HSJSONClientException("Exception running command '+command+'", e);
+			throw new HSClientException("Exception running command '+command+'", e);
 		}
 		return null;
 	}
 
-	public ControlResponse getControl(Integer ref) throws HSJSONClientException {
+	public ControlResponse getControl(Integer ref) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		if (null != ref) {
 			parameters.put("ref", Integer.toString(ref));
@@ -104,7 +105,7 @@ public class HSJSONClient implements Closeable {
 		return ControlResponse.parse(json);
 	}
 
-	public CountersResponse getCounter(String counter) throws HSJSONClientException {
+	public CountersResponse getCounter(String counter) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		if (null != counter) {
 			parameters.put("counter", counter);
@@ -113,7 +114,7 @@ public class HSJSONClient implements Closeable {
 		return CountersResponse.parse(json);
 	}
 
-	public EventsResponse getEvents() throws HSJSONClientException {
+	public EventsResponse getEvents() throws HSClientException {
 		final String json = executeGETQuery("getevents", null);
 		return EventsResponse.parse(json);
 	}
@@ -122,7 +123,7 @@ public class HSJSONClient implements Closeable {
 		return httpClient;
 	}
 
-	public LocationsResponse getLocations() throws HSJSONClientException {
+	public LocationsResponse getLocations() throws HSClientException {
 		final String json = executeGETQuery("getlocations", null);
 		return LocationsResponse.parse(json);
 	}
@@ -131,14 +132,14 @@ public class HSJSONClient implements Closeable {
 		return password;
 	}
 
-	public SettingResponse getSetting(String setting) throws HSJSONClientException {
+	public SettingResponse getSetting(String setting) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("setting", setting);
 		final String json = executeGETQuery("getsetting", parameters);
 		return SettingResponse.parse(json);
 	}
 
-	public StatusResponse getStatus(Integer ref, String location1, String location2) throws HSJSONClientException {
+	public StatusResponse getStatus(Integer ref, String location1, String location2) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		if (null != ref) {
 			parameters.put("ref", Integer.toString(ref));
@@ -161,13 +162,13 @@ public class HSJSONClient implements Closeable {
 		return username;
 	}
 
-	public void runEvent(Integer eventid) throws HSJSONClientException {
+	public void runEvent(Integer eventid) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("eventid", Integer.toString(eventid));
 		executeGETQuery("runevent", parameters);
 	}
 
-	public void runEvent(String group, String eventname) throws HSJSONClientException {
+	public void runEvent(String group, String eventname) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("group", group);
 		parameters.put("eventname", eventname);
@@ -178,7 +179,7 @@ public class HSJSONClient implements Closeable {
 		this.httpClient = httpClient;
 	}
 
-	public void speak(String phrase, String host) throws HSJSONClientException {
+	public void speak(String phrase, String host) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("phrase", phrase);
 		parameters.put("host", host);

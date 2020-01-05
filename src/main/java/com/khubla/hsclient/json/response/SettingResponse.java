@@ -2,15 +2,15 @@ package com.khubla.hsclient.json.response;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
-import com.khubla.hsclient.json.*;
+import com.khubla.hsclient.*;
 
 public class SettingResponse {
-	public static SettingResponse parse(String json) throws HSJSONClientException {
+	public static SettingResponse parse(String json) throws HSClientException {
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(json, SettingResponse.class);
 		} catch (final Exception e) {
-			throw new HSJSONClientException(e);
+			throw new HSClientException(e);
 		}
 	}
 
