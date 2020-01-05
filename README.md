@@ -1,4 +1,7 @@
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8ed69ebaffaa4cf5a78a79d8ac5a3113)](https://www.codacy.com/manual/teverett/hsclient?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=teverett/hsclient&amp;utm_campaign=Badge_Grade)
+
+
 HomeSeer Java Client
 ========
 
