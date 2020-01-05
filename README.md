@@ -18,27 +18,27 @@ Simply instantiate an [HSClient](https://github.com/teverett/hsclient/blob/maste
 
 To get all Devices:
 
-<pre>
+```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
 hsClient.close();
-</pre>
+```
 
 To get all Events:
 
-<pre>
+```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 final Map<Integer, Event> allEvents = hsClient.getEventsById();
 hsClient.close();
-</pre>
+```
 
 To get a single Device:
 
-<pre>
+```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 final Device device = hsClient.getDevice(DEVICEREF);
 hsClient.close();
-</pre>
+```
 
 
 
