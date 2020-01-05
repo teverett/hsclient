@@ -11,7 +11,7 @@ public interface HSClient extends Closeable {
 	 *
 	 * @param label
 	 * @param value
-	 * @return
+	 * @return Device
 	 * @throws HSClientException
 	 */
 	Device controlDeviceByLabel(String label, String value) throws HSClientException;
@@ -21,7 +21,7 @@ public interface HSClient extends Closeable {
 	 *
 	 * @param ref
 	 * @param value
-	 * @return
+	 * @return Device
 	 * @throws HSClientException
 	 */
 	Device controlDeviceByValue(Integer ref, String value) throws HSClientException;
