@@ -5,6 +5,10 @@ import java.util.*;
 
 import com.fasterxml.jackson.databind.util.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class DateConverter extends StdConverter<String, Date> {
 	@Override
 	public Date convert(String value) {

@@ -2,6 +2,10 @@ package com.khubla.hsclient.domain;
 
 import com.fasterxml.jackson.annotation.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class DeviceType {
 	@JsonProperty("Device_API")
 	private Integer device_API;

@@ -5,6 +5,10 @@ import java.util.*;
 import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class DeviceUtil {
 	private final HSClient hsClient;
 	private Map<String, Device> deviceMapByName;

@@ -7,7 +7,8 @@ import org.junit.*;
 import com.khubla.hsclient.domain.*;
 
 /**
- * @author tom
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
  */
 public class TestGetEvents extends AbstractTest {
 	@Test

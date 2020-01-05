@@ -7,6 +7,10 @@ import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.json.*;
 import com.khubla.hsclient.json.response.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class HSClientImpl implements HSClient {
 	/**
 	 * JSON API to HomeSeer

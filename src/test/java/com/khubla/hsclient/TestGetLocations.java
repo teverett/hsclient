@@ -5,7 +5,8 @@ import java.util.*;
 import org.junit.*;
 
 /**
- * @author tom
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
  */
 public class TestGetLocations extends AbstractTest {
 	@Test

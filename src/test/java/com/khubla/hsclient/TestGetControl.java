@@ -2,6 +2,10 @@ package com.khubla.hsclient;
 
 import org.junit.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class TestGetControl extends AbstractTest {
 	@Test
 	@Ignore

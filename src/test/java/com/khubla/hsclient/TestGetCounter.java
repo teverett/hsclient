@@ -5,9 +5,10 @@ import org.junit.*;
 import com.khubla.hsclient.domain.*;
 
 /**
- * test ignored: not every HS3 has a counter named "test"
+ * * test ignored: not every HS3 has a counter named "test"
  *
- * @author tom
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
  */
 public class TestGetCounter extends AbstractTest {
 	@Test

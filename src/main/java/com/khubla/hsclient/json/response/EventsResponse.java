@@ -7,6 +7,10 @@ import com.fasterxml.jackson.databind.*;
 import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class EventsResponse {
 	public static EventsResponse parse(String json) throws HSClientException {
 		try {

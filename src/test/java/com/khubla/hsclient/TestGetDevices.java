@@ -6,6 +6,10 @@ import org.junit.*;
 
 import com.khubla.hsclient.domain.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public class TestGetDevices extends AbstractTest {
 	@Test
 	@Ignore

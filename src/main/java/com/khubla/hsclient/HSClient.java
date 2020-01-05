@@ -5,6 +5,10 @@ import java.util.*;
 
 import com.khubla.hsclient.domain.*;
 
+/**
+ * @author Tom Everett.
+ * @copyright Copyright (C) 2020,tom@khubla.com
+ */
 public interface HSClient extends Closeable {
 	/**
 	 * send control command by device label
