@@ -21,9 +21,9 @@ To get all Devices:
 ```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 try {
-	final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
+   final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
 } finally {
-	hsClient.close();
+   hsClient.close();
 }
 ```
 
@@ -32,9 +32,9 @@ To get all Events:
 ```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 try {
-	final Map<Integer, Event> allEvents = hsClient.getEventsById();
+   final Map<Integer, Event> allEvents = hsClient.getEventsById();
 } finally {
-	hsClient.close();
+   hsClient.close();
 }
 ```
 
@@ -43,9 +43,9 @@ To get a single Device:
 ```java
 final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
 try {
-	final Device device = hsClient.getDevice(DEVICEREF);
+   final Device device = hsClient.getDevice(DEVICEREF);
 } finally {
-	hsClient.close();
+   hsClient.close();
 }
 ```
 
