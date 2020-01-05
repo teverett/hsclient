@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.*;
 import com.khubla.hsclient.*;
 
 /**
- * @author Tom Everett.
- * @copyright Copyright (C) 2020,tom@khubla.com
+ * @author Tom Everett
+ *         <p>
+ *         Copyright (C) 2020,tom@khubla.com
+ *         </p>
  */
 public class LocationsResponse {
 	public static LocationsResponse parse(String json) throws HSClientException {

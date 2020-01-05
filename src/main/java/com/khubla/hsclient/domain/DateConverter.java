@@ -6,8 +6,10 @@ import java.util.*;
 import com.fasterxml.jackson.databind.util.*;
 
 /**
- * @author Tom Everett.
- * @copyright Copyright (C) 2020,tom@khubla.com
+ * @author Tom Everett
+ *         <p>
+ *         Copyright (C) 2020,tom@khubla.com
+ *         </p>
  */
 public class DateConverter extends StdConverter<String, Date> {
 	@Override

@@ -8,8 +8,10 @@ import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
 
 /**
- * @author Tom Everett.
- * @copyright Copyright (C) 2020,tom@khubla.com
+ * @author Tom Everett
+ *         <p>
+ *         Copyright (C) 2020,tom@khubla.com
+ *         </p>
  */
 public class CountersResponse {
 	public static CountersResponse parse(String json) throws HSClientException {

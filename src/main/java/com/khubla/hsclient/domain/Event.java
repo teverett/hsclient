@@ -3,8 +3,10 @@ package com.khubla.hsclient.domain;
 import com.fasterxml.jackson.annotation.*;
 
 /**
- * @author Tom Everett.
- * @copyright Copyright (C) 2020,tom@khubla.com
+ * @author Tom Everett
+ *         <p>
+ *         Copyright (C) 2020,tom@khubla.com
+ *         </p>
  */
 public class Event {
 	@JsonProperty("Group")

@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.annotation.*;
 import com.khubla.hsclient.*;
 
 /**
- * @author Tom Everett.
- * @copyright Copyright (C) 2020,tom@khubla.com
+ * @author Tom Everett
+ *         <p>
+ *         Copyright (C) 2020,tom@khubla.com
+ *         </p>
  */
 public class Device {
 	public static Device parse(String json) throws HSClientException {
