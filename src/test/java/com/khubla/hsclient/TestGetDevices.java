@@ -8,6 +8,7 @@ import com.khubla.hsclient.domain.*;
 
 public class TestGetDevices extends AbstractTest {
 	@Test
+	@Ignore
 	public void testGetByRef() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
@@ -21,6 +22,7 @@ public class TestGetDevices extends AbstractTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGeyByName() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);

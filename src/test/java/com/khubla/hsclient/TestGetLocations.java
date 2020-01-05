@@ -9,6 +9,7 @@ import org.junit.*;
  */
 public class TestGetLocations extends AbstractTest {
 	@Test
+	@Ignore
 	public void testGetLocations() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);

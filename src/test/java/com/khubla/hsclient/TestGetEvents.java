@@ -11,6 +11,7 @@ import com.khubla.hsclient.domain.*;
  */
 public class TestGetEvents extends AbstractTest {
 	@Test
+	@Ignore
 	public void testGetEventsById() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
@@ -24,6 +25,7 @@ public class TestGetEvents extends AbstractTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetEventsByName() {
 		try {
 			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
