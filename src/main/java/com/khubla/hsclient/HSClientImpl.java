@@ -140,10 +140,19 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public List<String> getLocations() throws HSClientException {
+	public List<String> getLocations1() throws HSClientException {
 		final LocationsResponse locationsResponse = hsJSONClient.getLocations();
 		if (null != locationsResponse) {
 			return locationsResponse.getLocation1();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> getLocations2() throws HSClientException {
+		final LocationsResponse locationsResponse = hsJSONClient.getLocations();
+		if (null != locationsResponse) {
+			return locationsResponse.getLocation2();
 		}
 		return null;
 	}

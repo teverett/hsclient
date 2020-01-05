@@ -102,12 +102,20 @@ public interface HSClient extends Closeable {
 	Map<String, Event> getEventsByName() throws HSClientException;
 
 	/**
-	 * get all locations
+	 * get all locations1
 	 *
 	 * @return list of location names
 	 * @throws HSClientException
 	 */
-	List<String> getLocations() throws HSClientException;
+	List<String> getLocations1() throws HSClientException;
+
+	/**
+	 * get all locations2
+	 *
+	 * @return list of location names
+	 * @throws HSClientException
+	 */
+	List<String> getLocations2() throws HSClientException;
 
 	/**
 	 * run an event by event id
