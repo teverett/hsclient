@@ -8,6 +8,7 @@ import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.util.*;
+import org.slf4j.*;
 
 import com.khubla.hsclient.*;
 import com.khubla.hsclient.domain.*;
@@ -20,6 +21,32 @@ import com.khubla.hsclient.json.response.*;
  *         </p>
  */
 public class HSJSONClient implements Closeable {
+	/**
+	 * response
+	 */
+	public static class HTTPResponse {
+		private final String httpEntity;
+		private final int httpCode;
+
+		public HTTPResponse(String httpEntity, int httpCode) {
+			super();
+			this.httpEntity = httpEntity;
+			this.httpCode = httpCode;
+		}
+
+		public int getHttpCode() {
+			return httpCode;
+		}
+
+		public String getHttpEntity() {
+			return httpEntity;
+		}
+	}
+
+	/**
+	 * logger
+	 */
+	private static Logger logger = LoggerFactory.getLogger(HSJSONClient.class);
 	/**
 	 * user
 	 */
@@ -65,19 +92,25 @@ public class HSJSONClient implements Closeable {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("label", label);
 		parameters.put("value", value);
-		final String json = executeGETQuery("controldevicebylabel", parameters);
-		return Device.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("controldevicebylabel", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return Device.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public Device controlDeviceByValue(Integer ref, String value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("ref", Integer.toString(ref));
 		parameters.put("value", value);
-		final String json = executeGETQuery("controldevicebyvalue", parameters);
-		return Device.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("controldevicebyvalue", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return Device.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
-	private String executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
+	private HTTPResponse executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
 		try {
 			final URIBuilder builder = new URIBuilder(url);
 			builder.setParameter(USER, username).setParameter(PASS, password).addParameter(REQUEST, command);
@@ -91,15 +124,18 @@ public class HSJSONClient implements Closeable {
 			try {
 				final HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					return EntityUtils.toString(entity);
+					return new HTTPResponse(EntityUtils.toString(entity), response.getStatusLine().getStatusCode());
+				} else {
+					logger.warn("HTTP response '" + response.getStatusLine().getStatusCode() + "' running command '" + command + "'");
+					return new HTTPResponse(null, response.getStatusLine().getStatusCode());
 				}
 			} finally {
 				response.close();
 			}
 		} catch (final Exception e) {
-			throw new HSClientException("Exception running command '+command+'", e);
+			logger.error("Exception running command '" + command + "'", e);
+			throw new HSClientException("Exception running command '" + command + "'", e);
 		}
-		return null;
 	}
 
 	public ControlResponse getControl(Integer ref) throws HSClientException {
@@ -107,8 +143,11 @@ public class HSJSONClient implements Closeable {
 		if (null != ref) {
 			parameters.put("ref", Integer.toString(ref));
 		}
-		final String json = executeGETQuery("getcontrol", parameters);
-		return ControlResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getcontrol", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return ControlResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public CountersResponse getCounter(String counter) throws HSClientException {
@@ -116,13 +155,19 @@ public class HSJSONClient implements Closeable {
 		if (null != counter) {
 			parameters.put("counter", counter);
 		}
-		final String json = executeGETQuery("getcounter", parameters);
-		return CountersResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getcounter", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return CountersResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public EventsResponse getEvents() throws HSClientException {
-		final String json = executeGETQuery("getevents", null);
-		return EventsResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getevents", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return EventsResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public CloseableHttpClient getHttpClient() {
@@ -130,8 +175,11 @@ public class HSJSONClient implements Closeable {
 	}
 
 	public LocationsResponse getLocations() throws HSClientException {
-		final String json = executeGETQuery("getlocations", null);
-		return LocationsResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getlocations", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return LocationsResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public String getPassword() {
@@ -141,8 +189,11 @@ public class HSJSONClient implements Closeable {
 	public SettingResponse getSetting(String setting) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("setting", setting);
-		final String json = executeGETQuery("getsetting", parameters);
-		return SettingResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getsetting", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return SettingResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public StatusResponse getStatus(Integer ref, String location1, String location2) throws HSClientException {
@@ -156,8 +207,11 @@ public class HSJSONClient implements Closeable {
 				parameters.put("location2", location2);
 			}
 		}
-		final String json = executeGETQuery("getstatus", parameters);
-		return StatusResponse.parse(json);
+		final HTTPResponse httpResponse = executeGETQuery("getstatus", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return StatusResponse.parse(httpResponse.getHttpEntity());
+		}
+		return null;
 	}
 
 	public String getUrl() {

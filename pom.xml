@@ -6,12 +6,13 @@
 	<artifactId>hsclient</artifactId>
 	<packaging>jar</packaging>
 	<name>khubla.com HomeSeer Client</name>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<description>A Java Client for HomeSeer</description>
 	<properties>
 		<target.jvm>1.8</target.jvm>
 		<required-maven-version>3.3.1</required-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<logback.version>1.2.3</logback.version>
 	</properties>
 	<developers>
 		<developer>
@@ -58,6 +59,11 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>[2.9.10.1,)</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
