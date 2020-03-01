@@ -15,8 +15,8 @@ public interface HSClient extends Closeable {
 	/**
 	 * send control command by device label
 	 *
-	 * @param label name of value to set
-	 * @param value value to set
+	 * @param ref reference id of device
+	 * @param label, such as "on" or "off"
 	 * @return Device
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
