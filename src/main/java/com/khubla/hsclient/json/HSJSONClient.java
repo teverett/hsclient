@@ -88,10 +88,10 @@ public class HSJSONClient implements Closeable {
 		httpClient.close();
 	}
 
-	public Device controlDeviceByLabel(String label, Double value) throws HSClientException {
+	public Device controlDeviceByLabel(String label, int value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("label", label);
-		parameters.put("value", Double.toString(value));
+		parameters.put("value", Integer.toString(value));
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebylabel", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return Device.parse(httpResponse.getHttpEntity());
@@ -99,10 +99,10 @@ public class HSJSONClient implements Closeable {
 		return null;
 	}
 
-	public Device controlDeviceByValue(Integer ref, Double value) throws HSClientException {
+	public Device controlDeviceByValue(Integer ref, int value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("ref", Integer.toString(ref));
-		parameters.put("value", Double.toString(value));
+		parameters.put("value", Integer.toString(value));
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebyvalue", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return Device.parse(httpResponse.getHttpEntity());
