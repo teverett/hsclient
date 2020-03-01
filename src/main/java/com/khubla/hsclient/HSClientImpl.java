@@ -29,12 +29,12 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Device controlDeviceByLabel(String label, String value) throws HSClientException {
+	public Device controlDeviceByLabel(String label, Double value) throws HSClientException {
 		return hsJSONClient.controlDeviceByLabel(label, value);
 	}
 
 	@Override
-	public Device controlDeviceByValue(Integer ref, String value) throws HSClientException {
+	public Device controlDeviceByValue(Integer ref, Double value) throws HSClientException {
 		return hsJSONClient.controlDeviceByValue(ref, value);
 	}
 
