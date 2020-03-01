@@ -20,7 +20,7 @@ public interface HSClient extends Closeable {
 	 * @return Device
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
-	Device controlDeviceByLabel(String label, double value) throws HSClientException;
+	Device controlDeviceByLabel(Integer ref, String label) throws HSClientException;
 
 	/**
 	 * send control command by device ref
