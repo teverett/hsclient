@@ -158,10 +158,16 @@ public class HSClientImplMock implements HSClient {
 
 	@Override
 	public void close() throws IOException {
+		/*
+		 * intentionally empty
+		 */
 	}
 
 	@Override
 	public void connect(String url, String username, String password) throws HSClientException, IOException {
+		/*
+		 * intentionally empty
+		 */
 	}
 
 	@Override
@@ -241,13 +247,22 @@ public class HSClientImplMock implements HSClient {
 
 	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
+		/*
+		 * intentionally empty
+		 */
 	}
 
 	@Override
 	public void runEvent(String group, String name) throws HSClientException {
+		/*
+		 * intentionally empty
+		 */
 	}
 
 	@Override
 	public void speak(String phrase, String host) throws HSClientException {
+		/*
+		 * intentionally empty
+		 */
 	}
 }
