@@ -16,6 +16,25 @@ import com.khubla.hsclient.domain.*;
 public class TestGetDevices extends AbstractTest {
 	@Test
 	@Ignore
+	public void testGetByName() throws IOException {
+		HSClient hsClient = null;
+		try {
+			hsClient = new HSClientImpl();
+			Assert.assertNotNull(hsClient);
+			final Map<String, Device> devices = hsClient.getDevicesByName();
+			Assert.assertNotNull(devices);
+		} catch (final Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		} finally {
+			if (null != hsClient) {
+				hsClient.close();
+			}
+		}
+	}
+
+	@Test
+	@Ignore
 	public void testGetByRef() throws IOException {
 		HSClient hsClient = null;
 		try {
@@ -35,13 +54,13 @@ public class TestGetDevices extends AbstractTest {
 	}
 
 	@Test
-	@Ignore
-	public void testGeyByName() throws IOException {
+	public void testGetByRefMock() throws IOException {
 		HSClient hsClient = null;
 		try {
-			hsClient = new HSClientImpl();
+			hsClient = new HSClientImplMock();
+			hsClient.connect(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
-			final Map<String, Device> devices = hsClient.getDevicesByName();
+			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();

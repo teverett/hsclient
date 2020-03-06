@@ -32,4 +32,23 @@ public class TestGetCounter extends AbstractTest {
 			}
 		}
 	}
+
+	@Test
+	public void testGetCounterMock() throws IOException {
+		HSClient hsClient = null;
+		try {
+			hsClient = new HSClientImplMock();
+			hsClient.connect(URL, USERNAME, PASSWORD);
+			Assert.assertNotNull(hsClient);
+			final Counter counter = hsClient.getCounter("counter1");
+			Assert.assertNotNull(counter);
+		} catch (final Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		} finally {
+			if (null != hsClient) {
+				hsClient.close();
+			}
+		}
+	}
 }
