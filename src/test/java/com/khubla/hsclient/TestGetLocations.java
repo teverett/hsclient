@@ -33,4 +33,25 @@ public class TestGetLocations extends AbstractTest {
 			}
 		}
 	}
+
+	@Test
+	public void testGetLocationsMock() throws IOException {
+		HSClient hsClient = null;
+		try {
+			hsClient = new HSClientImplMock();
+			hsClient.connect(URL, USERNAME, PASSWORD);
+			Assert.assertNotNull(hsClient);
+			final List<String> locationNames1 = hsClient.getLocations1();
+			Assert.assertNotNull(locationNames1);
+			final List<String> locationNames2 = hsClient.getLocations2();
+			Assert.assertNull(locationNames2);
+		} catch (final Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		} finally {
+			if (null != hsClient) {
+				hsClient.close();
+			}
+		}
+	}
 }
