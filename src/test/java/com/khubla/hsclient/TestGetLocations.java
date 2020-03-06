@@ -1,5 +1,6 @@
 package com.khubla.hsclient;
 
+import java.io.*;
 import java.util.*;
 
 import org.junit.*;
@@ -13,9 +14,11 @@ import org.junit.*;
 public class TestGetLocations extends AbstractTest {
 	@Test
 	@Ignore
-	public void testGetLocations() {
+	public void testGetLocations() throws IOException {
+		HSClient hsClient = null;
 		try {
-			final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+			hsClient = new HSClientImpl();
+			hsClient.connect(URL, USERNAME, PASSWORD);
 			Assert.assertNotNull(hsClient);
 			final List<String> locationNames1 = hsClient.getLocations1();
 			Assert.assertNotNull(locationNames1);
@@ -24,6 +27,10 @@ public class TestGetLocations extends AbstractTest {
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();
+		} finally {
+			if (null != hsClient) {
+				hsClient.close();
+			}
 		}
 	}
 }

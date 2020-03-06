@@ -17,15 +17,22 @@ public class HSClientImpl implements HSClient {
 	/**
 	 * JSON API to HomeSeer
 	 */
-	private final HSJSONClient hsJSONClient;
-
-	public HSClientImpl(String url, String username, String password) {
-		hsJSONClient = new HSJSONClient(url, username, password);
-	}
+	private HSJSONClient hsJSONClient;
 
 	@Override
 	public void close() throws IOException {
-		hsJSONClient.close();
+		if (null != hsJSONClient) {
+			hsJSONClient.close();
+		}
+		hsJSONClient = null;
+	}
+
+	@Override
+	public void connect(String url, String username, String password) throws HSClientException, IOException {
+		if (null != hsJSONClient) {
+			hsJSONClient.close();
+		}
+		hsJSONClient = new HSJSONClient(url, username, password);
 	}
 
 	@Override

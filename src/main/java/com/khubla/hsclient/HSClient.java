@@ -13,6 +13,11 @@ import com.khubla.hsclient.domain.*;
  */
 public interface HSClient extends Closeable {
 	/**
+	 * connect
+	 */
+	void connect(String url, String username, String password) throws HSClientException, IOException;
+
+	/**
 	 * send control command by device label
 	 *
 	 * @param ref reference id of device
