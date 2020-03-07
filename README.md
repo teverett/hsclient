@@ -21,7 +21,7 @@ Maven coordinates
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.3</version>
+   <version>1.4</version>
 </dependency>
 ```
 
