@@ -16,6 +16,10 @@ public class HSClientException extends Exception {
 		super(e);
 	}
 
+	public HSClientException(String errorMessage) {
+		super(errorMessage);
+	}
+
 	public HSClientException(String errorMessage, Exception e) {
 		super(errorMessage, e);
 	}

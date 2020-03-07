@@ -16,7 +16,6 @@ public class TestGetControl extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			Assert.assertNotNull(hsClient);
 			// final ControlResponse controlResponse = hsClient.get
 			// Assert.assertNotNull(controlResponse);
 		} catch (final Exception e) {

@@ -15,6 +15,10 @@ import com.khubla.hsclient.json.response.*;
  */
 public class HSClientImpl implements HSClient {
 	/**
+	 * NOT_CONNECTED message
+	 */
+	private static final String NOT_CONNECTED = "Not Connected";
+	/**
 	 * JSON API to HomeSeer
 	 */
 	private HSJSONClient hsJSONClient;
@@ -37,151 +41,199 @@ public class HSClientImpl implements HSClient {
 
 	@Override
 	public Device controlDeviceByLabel(Integer ref, String label) throws HSClientException {
-		return hsJSONClient.controlDeviceByLabel(ref, label);
+		if (null != hsJSONClient) {
+			return hsJSONClient.controlDeviceByLabel(ref, label);
+		}
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Device controlDeviceByValue(Integer ref, double value) throws HSClientException {
-		return hsJSONClient.controlDeviceByValue(ref, value);
+		if (null != hsJSONClient) {
+			return hsJSONClient.controlDeviceByValue(ref, value);
+		}
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Counter getCounter(String name) throws HSClientException {
-		final CountersResponse countersResponse = hsJSONClient.getCounter(name);
-		if (null != countersResponse) {
-			if (countersResponse.getCounters().size() > 0) {
-				return countersResponse.getCounters().get(0);
+		if (null != hsJSONClient) {
+			final CountersResponse countersResponse = hsJSONClient.getCounter(name);
+			if (null != countersResponse) {
+				if (countersResponse.getCounters().size() > 0) {
+					return countersResponse.getCounters().get(0);
+				}
 			}
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Device getDevice(Integer ref) throws HSClientException {
-		final StatusResponse statusResponse = hsJSONClient.getStatus(ref, null, null);
-		if (null != statusResponse) {
-			return statusResponse.getDevices().get(0);
+		if (null != hsJSONClient) {
+			final StatusResponse statusResponse = hsJSONClient.getStatus(ref, null, null);
+			if (null != statusResponse) {
+				return statusResponse.getDevices().get(0);
+			}
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Device getDeviceControls(Integer ref) throws HSClientException {
-		final ControlResponse controlResponse = hsJSONClient.getControl(null);
-		if (null != controlResponse) {
-			return controlResponse.getDevices().get(0);
+		if (null != hsJSONClient) {
+			final ControlResponse controlResponse = hsJSONClient.getControl(null);
+			if (null != controlResponse) {
+				return controlResponse.getDevices().get(0);
+			}
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<String, Device> getDeviceControlsByName() throws HSClientException {
-		final ControlResponse controlResponse = hsJSONClient.getControl(null);
-		if (null != controlResponse) {
-			final Map<String, Device> ret = new HashMap<String, Device>();
-			for (final Device device : controlResponse.getDevices()) {
-				ret.put(device.getName(), device);
+		if (null != hsJSONClient) {
+			final ControlResponse controlResponse = hsJSONClient.getControl(null);
+			if (null != controlResponse) {
+				final Map<String, Device> ret = new HashMap<String, Device>();
+				for (final Device device : controlResponse.getDevices()) {
+					ret.put(device.getName(), device);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<Integer, Device> getDeviceControlsByRef() throws HSClientException {
-		final ControlResponse controlResponse = hsJSONClient.getControl(null);
-		if (null != controlResponse) {
-			final Map<Integer, Device> ret = new HashMap<Integer, Device>();
-			for (final Device device : controlResponse.getDevices()) {
-				ret.put(device.getRef(), device);
+		if (null != hsJSONClient) {
+			final ControlResponse controlResponse = hsJSONClient.getControl(null);
+			if (null != controlResponse) {
+				final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+				for (final Device device : controlResponse.getDevices()) {
+					ret.put(device.getRef(), device);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<String, Device> getDevicesByName() throws HSClientException {
-		final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
-		if (null != statusResponse) {
-			final Map<String, Device> ret = new HashMap<String, Device>();
-			for (final Device device : statusResponse.getDevices()) {
-				ret.put(device.getName(), device);
+		if (null != hsJSONClient) {
+			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
+			if (null != statusResponse) {
+				final Map<String, Device> ret = new HashMap<String, Device>();
+				for (final Device device : statusResponse.getDevices()) {
+					ret.put(device.getName(), device);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<Integer, Device> getDevicesByRef() throws HSClientException {
-		final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
-		if (null != statusResponse) {
-			final Map<Integer, Device> ret = new HashMap<Integer, Device>();
-			for (final Device device : statusResponse.getDevices()) {
-				ret.put(device.getRef(), device);
+		if (null != hsJSONClient) {
+			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
+			if (null != statusResponse) {
+				final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+				for (final Device device : statusResponse.getDevices()) {
+					ret.put(device.getRef(), device);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<Integer, Event> getEventsById() throws HSClientException {
-		final EventsResponse eventsResponse = hsJSONClient.getEvents();
-		if (null != eventsResponse) {
-			final Map<Integer, Event> ret = new HashMap<Integer, Event>();
-			for (final Event event : eventsResponse.getEvents()) {
-				ret.put(event.getId(), event);
+		if (null != hsJSONClient) {
+			final EventsResponse eventsResponse = hsJSONClient.getEvents();
+			if (null != eventsResponse) {
+				final Map<Integer, Event> ret = new HashMap<Integer, Event>();
+				for (final Event event : eventsResponse.getEvents()) {
+					ret.put(event.getId(), event);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public Map<String, Event> getEventsByName() throws HSClientException {
-		final EventsResponse eventsResponse = hsJSONClient.getEvents();
-		if (null != eventsResponse) {
-			final Map<String, Event> ret = new HashMap<String, Event>();
-			for (final Event event : eventsResponse.getEvents()) {
-				ret.put(event.getName(), event);
+		if (null != hsJSONClient) {
+			final EventsResponse eventsResponse = hsJSONClient.getEvents();
+			if (null != eventsResponse) {
+				final Map<String, Event> ret = new HashMap<String, Event>();
+				for (final Event event : eventsResponse.getEvents()) {
+					ret.put(event.getName(), event);
+				}
+				return ret;
 			}
-			return ret;
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public List<String> getLocations1() throws HSClientException {
-		final LocationsResponse locationsResponse = hsJSONClient.getLocations();
-		if (null != locationsResponse) {
-			return locationsResponse.getLocation1();
+		if (null != hsJSONClient) {
+			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
+			if (null != locationsResponse) {
+				return locationsResponse.getLocation1();
+			}
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public List<String> getLocations2() throws HSClientException {
-		final LocationsResponse locationsResponse = hsJSONClient.getLocations();
-		if (null != locationsResponse) {
-			return locationsResponse.getLocation2();
+		if (null != hsJSONClient) {
+			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
+			if (null != locationsResponse) {
+				return locationsResponse.getLocation2();
+			}
+			return null;
 		}
-		return null;
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
-		hsJSONClient.runEvent(eventId);
+		if (null != hsJSONClient) {
+			hsJSONClient.runEvent(eventId);
+		}
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void runEvent(String group, String name) throws HSClientException {
-		hsJSONClient.runEvent(group, name);
+		if (null != hsJSONClient) {
+			hsJSONClient.runEvent(group, name);
+		}
+		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void speak(String phrase, String host) throws HSClientException {
-		hsJSONClient.speak(phrase, host);
+		if (null != hsJSONClient) {
+			hsJSONClient.speak(phrase, host);
+		}
+		throw new HSClientException(NOT_CONNECTED);
 	}
 }

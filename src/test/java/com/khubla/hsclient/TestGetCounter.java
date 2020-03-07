@@ -20,7 +20,6 @@ public class TestGetCounter extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			Assert.assertNotNull(hsClient);
 			final Counter counter = hsClient.getCounter("test");
 			Assert.assertNotNull(counter);
 		} catch (final Exception e) {
@@ -39,7 +38,6 @@ public class TestGetCounter extends AbstractTest {
 		try {
 			hsClient = new HSClientImplMock();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			Assert.assertNotNull(hsClient);
 			final Counter counter = hsClient.getCounter("counter1");
 			Assert.assertNotNull(counter);
 		} catch (final Exception e) {

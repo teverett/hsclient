@@ -21,7 +21,6 @@ public class TestGetEvents extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			Assert.assertNotNull(hsClient);
 			final Map<Integer, Event> events = hsClient.getEventsById();
 			Assert.assertNotNull(events);
 		} catch (final Exception e) {
@@ -40,7 +39,7 @@ public class TestGetEvents extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			Assert.assertNotNull(hsClient);
+			hsClient.connect(URL, USERNAME, PASSWORD);
 			final Map<String, Event> events = hsClient.getEventsByName();
 			Assert.assertNotNull(events);
 		} catch (final Exception e) {

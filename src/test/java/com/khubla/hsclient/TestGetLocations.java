@@ -19,7 +19,6 @@ public class TestGetLocations extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			Assert.assertNotNull(hsClient);
 			final List<String> locationNames1 = hsClient.getLocations1();
 			Assert.assertNotNull(locationNames1);
 			final List<String> locationNames2 = hsClient.getLocations2();
