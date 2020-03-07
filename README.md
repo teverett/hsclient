@@ -21,7 +21,7 @@ Maven coordinates
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.2.1-SNAPSHOT</version>
+   <version>1.3</version>
 </dependency>
 ```
 
@@ -34,7 +34,8 @@ Simply instantiate an [HSClient](https://github.com/teverett/hsclient/blob/maste
 To get all Devices:
 
 ```java
-final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final HSClient hsClient = new HSClientImpl();
+hsclient.connect(URL, USERNAME, PASSWORD);
 try {
    final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
 } finally {
@@ -45,7 +46,8 @@ try {
 To get all Events:
 
 ```java
-final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final HSClient hsClient = new HSClientImpl();
+hsclient.connect(URL, USERNAME, PASSWORD);
 try {
    final Map<Integer, Event> allEvents = hsClient.getEventsById();
 } finally {
@@ -56,7 +58,8 @@ try {
 To get a single Device:
 
 ```java
-final HSClient hsClient = new HSClientImpl(URL, USERNAME, PASSWORD);
+final HSClient hsClient = new HSClientImpl();
+hsclient.connect(URL, USERNAME, PASSWORD);
 try {
    final Device device = hsClient.getDevice(DEVICEREF);
 } finally {
