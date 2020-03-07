@@ -214,6 +214,18 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public String getSetting(String name) throws HSClientException {
+		if (null != hsJSONClient) {
+			final SettingResponse settingResponse = hsJSONClient.getSetting(name);
+			if (null != settingResponse) {
+				return settingResponse.getValue();
+			}
+			return null;
+		}
+		throw new HSClientException(NOT_CONNECTED);
+	}
+
+	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.runEvent(eventId);

@@ -15,6 +15,7 @@ import com.khubla.hsclient.domain.*;
  */
 public class TestGetDevices extends AbstractTest {
 	@Test
+	@Ignore
 	public void testGetByName() throws IOException {
 		HSClient hsClient = null;
 		try {

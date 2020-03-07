@@ -246,6 +246,14 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public String getSetting(String name) throws HSClientException {
+		/*
+		 * intentionally empty, for now
+		 */
+		return null;
+	}
+
+	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
 		/*
 		 * intentionally empty

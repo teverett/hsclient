@@ -129,6 +129,14 @@ public interface HSClient extends Closeable {
 	List<String> getLocations2() throws HSClientException;
 
 	/**
+	 * get a setting
+	 *
+	 * @param name
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 */
+	String getSetting(String name) throws HSClientException;
+
+	/**
 	 * run an event by event id
 	 *
 	 * @param eventId
@@ -152,5 +160,5 @@ public interface HSClient extends Closeable {
 	 * @param host host to speak on
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
-	public void speak(String phrase, String host) throws HSClientException;
+	void speak(String phrase, String host) throws HSClientException;
 }
