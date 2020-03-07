@@ -6,7 +6,7 @@
 	<artifactId>hsclient</artifactId>
 	<packaging>jar</packaging>
 	<name>khubla.com HomeSeer Client</name>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	<description>A Java Client for HomeSeer</description>
 	<properties>
 		<target.jvm>1.8</target.jvm>
