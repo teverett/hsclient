@@ -42,7 +42,14 @@ public class HSClientImpl implements HSClient {
 	@Override
 	public Device controlDeviceByLabel(Integer ref, String label) throws HSClientException {
 		if (null != hsJSONClient) {
-			return hsJSONClient.controlDeviceByLabel(ref, label);
+			final DeviceResponse deviceResponse = hsJSONClient.controlDeviceByLabel(ref, label);
+			if (null != deviceResponse) {
+				final List<Device> devices = deviceResponse.getDevices();
+				if ((null != devices) && (devices.size() > 0)) {
+					return devices.get(0);
+				}
+			}
+			return null;
 		}
 		throw new HSClientException(NOT_CONNECTED);
 	}
@@ -50,7 +57,14 @@ public class HSClientImpl implements HSClient {
 	@Override
 	public Device controlDeviceByValue(Integer ref, double value) throws HSClientException {
 		if (null != hsJSONClient) {
-			return hsJSONClient.controlDeviceByValue(ref, value);
+			final DeviceResponse deviceResponse = hsJSONClient.controlDeviceByValue(ref, value);
+			if (null != deviceResponse) {
+				final List<Device> devices = deviceResponse.getDevices();
+				if ((null != devices) && (devices.size() > 0)) {
+					return devices.get(0);
+				}
+			}
+			return null;
 		}
 		throw new HSClientException(NOT_CONNECTED);
 	}

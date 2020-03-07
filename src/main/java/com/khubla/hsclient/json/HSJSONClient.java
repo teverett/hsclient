@@ -11,7 +11,6 @@ import org.apache.http.util.*;
 import org.slf4j.*;
 
 import com.khubla.hsclient.*;
-import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.json.response.*;
 
 /**
@@ -88,24 +87,24 @@ public class HSJSONClient implements Closeable {
 		httpClient.close();
 	}
 
-	public Device controlDeviceByLabel(Integer ref, String label) throws HSClientException {
+	public DeviceResponse controlDeviceByLabel(Integer ref, String label) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("ref", Integer.toString(ref));
 		parameters.put("label", label);
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebylabel", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
-			return Device.parse(httpResponse.getHttpEntity());
+			return DeviceResponse.parse(httpResponse.getHttpEntity());
 		}
 		return null;
 	}
 
-	public Device controlDeviceByValue(Integer ref, double value) throws HSClientException {
+	public DeviceResponse controlDeviceByValue(Integer ref, double value) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("ref", Integer.toString(ref));
 		parameters.put("value", Double.toString(value));
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebyvalue", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
-			return Device.parse(httpResponse.getHttpEntity());
+			return DeviceResponse.parse(httpResponse.getHttpEntity());
 		}
 		return null;
 	}

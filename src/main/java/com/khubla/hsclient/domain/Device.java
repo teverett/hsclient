@@ -25,6 +25,7 @@ public class Device {
 
 	private Integer ref;
 	private String location;
+	@JsonProperty("name")
 	private String name;
 	private String location2;
 	private Double value;
