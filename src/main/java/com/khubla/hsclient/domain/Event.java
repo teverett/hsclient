@@ -18,7 +18,7 @@ public class Event {
 	@JsonProperty("voice_command")
 	private String voice_command;
 	@JsonProperty("voice_command_enabled")
-	private String voice_command_enabled;
+	private Boolean voice_command_enabled;
 
 	public String getGroup() {
 		return group;
@@ -36,7 +36,7 @@ public class Event {
 		return voice_command;
 	}
 
-	public String getVoice_command_enabled() {
+	public Boolean getVoice_command_enabled() {
 		return voice_command_enabled;
 	}
 
@@ -56,7 +56,7 @@ public class Event {
 		this.voice_command = voice_command;
 	}
 
-	public void setVoice_command_enabled(String voice_command_enabled) {
+	public void setVoice_command_enabled(Boolean voice_command_enabled) {
 		this.voice_command_enabled = voice_command_enabled;
 	}
 }

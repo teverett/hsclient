@@ -33,7 +33,7 @@ public class Device {
 	@JsonDeserialize(converter = DateConverter.class)
 	private Date last_change;
 	private Integer relationship;
-	private String hide_from_view;
+	private Boolean hide_from_view;
 	private List<Integer> associated_devices = new ArrayList<Integer>();
 	private DeviceType device_type;
 	private String device_image;
@@ -73,7 +73,7 @@ public class Device {
 		return device_type_values;
 	}
 
-	public String getHide_from_view() {
+	public Boolean getHide_from_view() {
 		return hide_from_view;
 	}
 
@@ -157,7 +157,7 @@ public class Device {
 		this.device_type_values = device_type_values;
 	}
 
-	public void setHide_from_view(String hide_from_view) {
+	public void setHide_from_view(Boolean hide_from_view) {
 		this.hide_from_view = hide_from_view;
 	}
 

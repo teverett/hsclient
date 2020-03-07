@@ -14,27 +14,27 @@ public class ControlPair {
 	@JsonProperty("SingleRangeEntry")
 	private String singleRangeEntry;
 	@JsonProperty("ControlButtonType")
-	private String controlButtonType;
+	private Integer controlButtonType;
 	@JsonProperty("ControlButtonCustom")
 	private String controlButtonCustom;
 	@JsonProperty("CCIndex")
-	private String cCIndex;
+	private Integer cCIndex;
 	@JsonProperty("Ref")
 	private String ref;
 	@JsonProperty("Label")
 	private String label;
 	@JsonProperty("ControlType")
-	private String controlType;
+	private Integer controlType;
 	@JsonProperty("ControlLoc_Row")
-	private String controlLoc_Row;
+	private Integer controlLoc_Row;
 	@JsonProperty("ControlLoc_Column")
-	private String controlLoc_Column;
+	private Integer controlLoc_Column;
 	@JsonProperty("ControlLoc_ColumnSpan")
-	private String controlLoc_ColumnSpan;
+	private Integer controlLoc_ColumnSpan;
 	@JsonProperty("ControlUse")
-	private String controlUse;
+	private Integer controlUse;
 	@JsonProperty("ControlValue")
-	private String controlValue;
+	private Integer controlValue;
 	@JsonProperty("ControlString")
 	private String controlString;
 	@JsonProperty("ControlStringList")
@@ -42,13 +42,13 @@ public class ControlPair {
 	@JsonProperty("ControlStringSelected")
 	private String controlStringSelected;
 	@JsonProperty("ControlFlag")
-	private String controlFlag;
+	private Boolean controlFlag;
 	@JsonProperty("ControlLocation")
 	private ControlLocation controlLocation;
 	@JsonProperty("Range")
 	private Range range;
 
-	public String getcCIndex() {
+	public Integer getcCIndex() {
 		return cCIndex;
 	}
 
@@ -56,23 +56,23 @@ public class ControlPair {
 		return controlButtonCustom;
 	}
 
-	public String getControlButtonType() {
+	public Integer getControlButtonType() {
 		return controlButtonType;
 	}
 
-	public String getControlFlag() {
+	public Boolean getControlFlag() {
 		return controlFlag;
 	}
 
-	public String getControlLoc_Column() {
+	public Integer getControlLoc_Column() {
 		return controlLoc_Column;
 	}
 
-	public String getControlLoc_ColumnSpan() {
+	public Integer getControlLoc_ColumnSpan() {
 		return controlLoc_ColumnSpan;
 	}
 
-	public String getControlLoc_Row() {
+	public Integer getControlLoc_Row() {
 		return controlLoc_Row;
 	}
 
@@ -92,15 +92,15 @@ public class ControlPair {
 		return controlStringSelected;
 	}
 
-	public String getControlType() {
+	public Integer getControlType() {
 		return controlType;
 	}
 
-	public String getControlUse() {
+	public Integer getControlUse() {
 		return controlUse;
 	}
 
-	public String getControlValue() {
+	public Integer getControlValue() {
 		return controlValue;
 	}
 
@@ -124,7 +124,7 @@ public class ControlPair {
 		return singleRangeEntry;
 	}
 
-	public void setcCIndex(String cCIndex) {
+	public void setcCIndex(Integer cCIndex) {
 		this.cCIndex = cCIndex;
 	}
 
@@ -132,23 +132,23 @@ public class ControlPair {
 		this.controlButtonCustom = controlButtonCustom;
 	}
 
-	public void setControlButtonType(String controlButtonType) {
+	public void setControlButtonType(Integer controlButtonType) {
 		this.controlButtonType = controlButtonType;
 	}
 
-	public void setControlFlag(String controlFlag) {
+	public void setControlFlag(Boolean controlFlag) {
 		this.controlFlag = controlFlag;
 	}
 
-	public void setControlLoc_Column(String controlLoc_Column) {
+	public void setControlLoc_Column(Integer controlLoc_Column) {
 		this.controlLoc_Column = controlLoc_Column;
 	}
 
-	public void setControlLoc_ColumnSpan(String controlLoc_ColumnSpan) {
+	public void setControlLoc_ColumnSpan(Integer controlLoc_ColumnSpan) {
 		this.controlLoc_ColumnSpan = controlLoc_ColumnSpan;
 	}
 
-	public void setControlLoc_Row(String controlLoc_Row) {
+	public void setControlLoc_Row(Integer controlLoc_Row) {
 		this.controlLoc_Row = controlLoc_Row;
 	}
 
@@ -168,15 +168,15 @@ public class ControlPair {
 		this.controlStringSelected = controlStringSelected;
 	}
 
-	public void setControlType(String controlType) {
+	public void setControlType(Integer controlType) {
 		this.controlType = controlType;
 	}
 
-	public void setControlUse(String controlUse) {
+	public void setControlUse(Integer controlUse) {
 		this.controlUse = controlUse;
 	}
 
-	public void setControlValue(String controlValue) {
+	public void setControlValue(Integer controlValue) {
 		this.controlValue = controlValue;
 	}
 
