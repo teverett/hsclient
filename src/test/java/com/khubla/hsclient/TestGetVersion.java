@@ -1,5 +1,7 @@
 package com.khubla.hsclient;
 
+import java.io.*;
+
 import org.junit.*;
 
 /**
@@ -8,19 +10,24 @@ import org.junit.*;
  *         Copyright (C) 2020,tom@khubla.com
  *         </p>
  */
-public class TestGetControl extends AbstractTest {
+public class TestGetVersion extends AbstractTest {
 	@Test
 	@Ignore
-	public void testGetControl() {
+	public void testGetVersion() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			// final ControlResponse controlResponse = hsClient.get
-			// Assert.assertNotNull(controlResponse);
+			final String version = hsClient.getVersion();
+			Assert.assertNotNull(version);
+			Assert.assertTrue(version.compareTo("1.0") == 0);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();
+		} finally {
+			if (null != hsClient) {
+				hsClient.close();
+			}
 		}
 	}
 }

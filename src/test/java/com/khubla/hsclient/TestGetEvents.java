@@ -40,7 +40,7 @@ public class TestGetEvents extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(URL, USERNAME, PASSWORD);
-			final Map<String, Event> events = hsClient.getEventsByName();
+			final Map<String, Map<String, Event>> events = hsClient.getEventsByGroup();
 			Assert.assertNotNull(events);
 		} catch (final Exception e) {
 			e.printStackTrace();

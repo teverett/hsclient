@@ -172,13 +172,16 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<Integer, Event> getEventsById() throws HSClientException {
+	public Map<String, Map<String, Event>> getEventsByGroup() throws HSClientException {
 		if (null != hsJSONClient) {
 			final EventsResponse eventsResponse = hsJSONClient.getEvents();
 			if (null != eventsResponse) {
-				final Map<Integer, Event> ret = new HashMap<Integer, Event>();
+				final Map<String, Map<String, Event>> ret = new HashMap<String, Map<String, Event>>();
 				for (final Event event : eventsResponse.getEvents()) {
-					ret.put(event.getId(), event);
+					if (null == ret.get(event.getGroup())) {
+						ret.put(event.getGroup(), new HashMap<String, Event>());
+					}
+					ret.get(event.getGroup()).put(event.getName(), event);
 				}
 				return ret;
 			}
@@ -188,13 +191,13 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Map<String, Event> getEventsByName() throws HSClientException {
+	public Map<Integer, Event> getEventsById() throws HSClientException {
 		if (null != hsJSONClient) {
 			final EventsResponse eventsResponse = hsJSONClient.getEvents();
 			if (null != eventsResponse) {
-				final Map<String, Event> ret = new HashMap<String, Event>();
+				final Map<Integer, Event> ret = new HashMap<Integer, Event>();
 				for (final Event event : eventsResponse.getEvents()) {
-					ret.put(event.getName(), event);
+					ret.put(event.getId(), event);
 				}
 				return ret;
 			}
@@ -259,6 +262,18 @@ public class HSClientImpl implements HSClient {
 	public void speak(String phrase, String host) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.speak(phrase, host);
+		}
+		throw new HSClientException(NOT_CONNECTED);
+	}
+
+	@Override
+	public String getVersion() throws HSClientException, IOException {
+		if (null != hsJSONClient) {
+			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
+			if (null != statusResponse) {
+				return statusResponse.getVersion();
+			}
+			return null;
 		}
 		throw new HSClientException(NOT_CONNECTED);
 	}

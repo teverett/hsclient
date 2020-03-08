@@ -23,7 +23,7 @@ public class HSClientImplMock implements HSClient {
 	/**
 	 * events by ref
 	 */
-	private static Map<String, Event> eventsByName = new HashMap<String, Event>();
+	private static Map<String, Map<String, Event>> eventsByGroup = new HashMap<String, Map<String, Event>>();
 	/**
 	 * events by id
 	 */
@@ -37,7 +37,7 @@ public class HSClientImplMock implements HSClient {
 		if (devicesByRef.size() == 0) {
 			addDevices();
 		}
-		if (eventsByName.size() == 0) {
+		if (eventsByGroup.size() == 0) {
 			addEvents();
 		}
 		if (countersByName.size() == 0) {
@@ -142,7 +142,10 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	private void addEvent(Event event) {
-		eventsByName.put(event.getName(), event);
+		if (null == eventsByGroup.get(event.getGroup())) {
+			eventsByGroup.put(event.getGroup(), new HashMap<String, Event>());
+		}
+		eventsByGroup.get(event.getGroup()).put(event.getName(), event);
 		eventsById.put(event.getId(), event);
 	}
 
@@ -220,13 +223,13 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public Map<Integer, Event> getEventsById() throws HSClientException {
-		return eventsById;
+	public Map<String, Map<String, Event>> getEventsByGroup() throws HSClientException {
+		return eventsByGroup;
 	}
 
 	@Override
-	public Map<String, Event> getEventsByName() throws HSClientException {
-		return eventsByName;
+	public Map<Integer, Event> getEventsById() throws HSClientException {
+		return eventsById;
 	}
 
 	@Override
@@ -272,5 +275,10 @@ public class HSClientImplMock implements HSClient {
 		/*
 		 * intentionally empty
 		 */
+	}
+
+	@Override
+	public String getVersion() throws HSClientException, IOException {
+		return "1.0";
 	}
 }

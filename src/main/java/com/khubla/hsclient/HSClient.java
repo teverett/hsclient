@@ -97,20 +97,20 @@ public interface HSClient extends Closeable {
 	Map<Integer, Device> getDevicesByRef() throws HSClientException;
 
 	/**
+	 * get all events by group name
+	 *
+	 * @return events by group name and then by name
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 */
+	Map<String, Map<String, Event>> getEventsByGroup() throws HSClientException;
+
+	/**
 	 * get all events by id
 	 *
 	 * @return events by id
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	Map<Integer, Event> getEventsById() throws HSClientException;
-
-	/**
-	 * get all events by name
-	 *
-	 * @return events by name
-	 * @throws HSClientException Exception encountered communicating with HomeSeer
-	 */
-	Map<String, Event> getEventsByName() throws HSClientException;
 
 	/**
 	 * get all locations1
@@ -135,6 +135,14 @@ public interface HSClient extends Closeable {
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	String getSetting(String name) throws HSClientException;
+
+	/**
+	 * get HS JSON API version
+	 *
+	 * @return version string
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 */
+	String getVersion() throws HSClientException, IOException;
 
 	/**
 	 * run an event by event id
