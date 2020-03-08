@@ -267,7 +267,7 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public String getVersion() throws HSClientException, IOException {
+	public String getVersion() throws HSClientException {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 			if (null != statusResponse) {

@@ -142,7 +142,7 @@ public interface HSClient extends Closeable {
 	 * @return version string
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
-	String getVersion() throws HSClientException, IOException;
+	String getVersion() throws HSClientException;
 
 	/**
 	 * run an event by event id

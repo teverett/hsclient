@@ -278,7 +278,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public String getVersion() throws HSClientException, IOException {
+	public String getVersion() throws HSClientException {
 		return "1.0";
 	}
 }
