@@ -1,4 +1,4 @@
-[![Travis](https://travis-ci.org/teverett/hsclient.svg?branch=master)](https://travis-ci.org/teverett/hsclient)
+![CI](https://github.com/teverett/hsclient/workflows/CI/badge.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8ed69ebaffaa4cf5a78a79d8ac5a3113)](https://www.codacy.com/manual/teverett/hsclient?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=teverett/hsclient&amp;utm_campaign=Badge_Grade)
 
 
