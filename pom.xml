@@ -162,7 +162,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>check</id>
+			<id>owasp-check</id>
 			<build>
 				<plugins>
 					<plugin>
