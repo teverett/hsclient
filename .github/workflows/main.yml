@@ -26,9 +26,9 @@ jobs:
 
     - name: owasp check
       run: mvn -Powasp-check -B verify --file pom.xml
-
-   - name: plugin updates
+      
+    - name: plugin updates
       run: mvn org.codehaus.mojo:versions-maven-plugin:2.7:display-plugin-updates
 
-   - name: dependency updates
+    - name: dependency updates
       run: mvn org.codehaus.mojo:versions-maven-plugin:2.7:display-dependency-updates
