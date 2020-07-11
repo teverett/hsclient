@@ -167,7 +167,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public void connect(String url, String username, String password) throws HSClientException, IOException {
+	public void connect(HSConfiguration hsConfiguration) throws HSClientException, IOException {
 		/*
 		 * intentionally empty
 		 */
@@ -257,6 +257,11 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public String getVersion() throws HSClientException {
+		return "1.0";
+	}
+
+	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
 		/*
 		 * intentionally empty
@@ -275,10 +280,5 @@ public class HSClientImplMock implements HSClient {
 		/*
 		 * intentionally empty
 		 */
-	}
-
-	@Override
-	public String getVersion() throws HSClientException {
-		return "1.0";
 	}
 }

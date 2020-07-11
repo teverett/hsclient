@@ -20,7 +20,7 @@ public class TestGetDevices extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final Map<String, Device> devices = hsClient.getDevicesByName();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
@@ -39,7 +39,7 @@ public class TestGetDevices extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
@@ -57,7 +57,7 @@ public class TestGetDevices extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImplMock();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {
@@ -76,7 +76,7 @@ public class TestGetDevices extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
 			Assert.assertNotNull(devices);
 			for (final Device device : devices.values()) {

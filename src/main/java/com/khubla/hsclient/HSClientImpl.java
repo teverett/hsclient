@@ -32,11 +32,11 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void connect(String url, String username, String password) throws HSClientException, IOException {
+	public void connect(HSConfiguration hsConfiguration) throws HSClientException, IOException {
 		if (null != hsJSONClient) {
 			hsJSONClient.close();
 		}
-		hsJSONClient = new HSJSONClient(url, username, password);
+		hsJSONClient = new HSJSONClient(hsConfiguration.getHsURL(), hsConfiguration.getHsUsername(), hsConfiguration.getHsPassword());
 	}
 
 	@Override
@@ -243,6 +243,18 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public String getVersion() throws HSClientException {
+		if (null != hsJSONClient) {
+			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
+			if (null != statusResponse) {
+				return statusResponse.getVersion();
+			}
+			return null;
+		}
+		throw new HSClientException(NOT_CONNECTED);
+	}
+
+	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.runEvent(eventId);
@@ -262,18 +274,6 @@ public class HSClientImpl implements HSClient {
 	public void speak(String phrase, String host) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.speak(phrase, host);
-		}
-		throw new HSClientException(NOT_CONNECTED);
-	}
-
-	@Override
-	public String getVersion() throws HSClientException {
-		if (null != hsJSONClient) {
-			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
-			if (null != statusResponse) {
-				return statusResponse.getVersion();
-			}
-			return null;
 		}
 		throw new HSClientException(NOT_CONNECTED);
 	}

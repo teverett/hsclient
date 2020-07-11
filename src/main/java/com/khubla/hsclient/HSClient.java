@@ -15,7 +15,7 @@ public interface HSClient extends Closeable {
 	/**
 	 * connect
 	 */
-	void connect(String url, String username, String password) throws HSClientException, IOException;
+	void connect(HSConfiguration hsConfiguration) throws HSClientException, IOException;
 
 	/**
 	 * send control command by device label

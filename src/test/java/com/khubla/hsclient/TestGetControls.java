@@ -19,7 +19,7 @@ public class TestGetControls extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final Map<String, Device> devices = hsClient.getDeviceControlsByName();
 			Assert.assertNotNull(devices);
 		} catch (final Exception e) {

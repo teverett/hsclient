@@ -17,7 +17,7 @@ public class TestGetVersion extends AbstractTest {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
-			hsClient.connect(URL, USERNAME, PASSWORD);
+			hsClient.connect(hsConfiguration);
 			final String version = hsClient.getVersion();
 			Assert.assertNotNull(version);
 			Assert.assertTrue(version.compareTo("1.0") == 0);
