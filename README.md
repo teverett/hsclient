@@ -19,12 +19,12 @@ hsclient is distributed under the BSD 3-Clause License.
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.8</version>
+   <version>1.9</version>
 </dependency>
 ```
 
 
-##Usage
+## Usage
 
 Simply instantiate an [HSClient](https://github.com/teverett/hsclient/blob/master/src/main/java/com/khubla/hsclient/HSClient.java) and call the API methods
 
@@ -64,7 +64,7 @@ try {
 }
 ```
 
-###Using the poller
+### Using the poller
 
 hsClient includes a multithreaded poller which calls a callback interface. To use the poller, provide an implementation of `DataPointCallback` to the class `Poller`.
 
