@@ -14,6 +14,10 @@ package com.khubla.hsclient.domain;
 public enum APIType {
 	none(0), plugin(4), thermostat(16), media(32), security(8), sourceswitch(64), script(128);
 
+	public static APIType fromString(String id) {
+		return valueOfLabel(Integer.valueOf(id));
+	}
+
 	public static APIType valueOfLabel(Integer id) {
 		for (final APIType e : values()) {
 			if (e.id == id) {

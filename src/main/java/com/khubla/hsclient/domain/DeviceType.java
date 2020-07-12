@@ -1,6 +1,7 @@
 package com.khubla.hsclient.domain;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.*;
 
 /**
  * @author Tom Everett
@@ -10,7 +11,8 @@ import com.fasterxml.jackson.annotation.*;
  */
 public class DeviceType {
 	@JsonProperty("Device_API")
-	private Integer device_API;
+	@JsonDeserialize(converter = APITypeConverter.class)
+	private APIType device_API;
 	@JsonProperty("Device_API_Description")
 	private String device_API_Description;
 	@JsonProperty("Device_Type")
@@ -22,7 +24,7 @@ public class DeviceType {
 	@JsonProperty("Device_SubType_Description")
 	private String device_SubType_Description;
 
-	public Integer getDevice_API() {
+	public APIType getDevice_API() {
 		return device_API;
 	}
 
@@ -46,7 +48,7 @@ public class DeviceType {
 		return device_Type_Description;
 	}
 
-	public void setDevice_API(Integer device_API) {
+	public void setDevice_API(APIType device_API) {
 		this.device_API = device_API;
 	}
 
