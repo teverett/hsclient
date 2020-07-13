@@ -14,6 +14,10 @@ import com.khubla.hsclient.domain.*;
 public interface HSClient extends Closeable {
 	/**
 	 * connect
+	 * 
+	 * @param hsConfiguration config
+	 * @throws HSClientException exception connecting
+	 * @throws IOException exception connecting
 	 */
 	void connect(HSConfiguration hsConfiguration) throws HSClientException, IOException;
 
@@ -40,9 +44,9 @@ public interface HSClient extends Closeable {
 	/**
 	 * get child devices of device
 	 *
-	 * @param device
+	 * @param device parent device
 	 * @return devices
-	 * @throws HSClientException
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	Map<Integer, Device> getChilden(Device device) throws HSClientException;
 
@@ -141,15 +145,16 @@ public interface HSClient extends Closeable {
 	 * get root devices
 	 *
 	 * @return devices
-	 * @throws HSClientException
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	Map<Integer, Device> getRootDevices() throws HSClientException;
 
 	/**
 	 * get a setting
 	 *
-	 * @param name
+	 * @param name of setting
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 * @return setting value
 	 */
 	String getSetting(String name) throws HSClientException;
 
@@ -164,7 +169,7 @@ public interface HSClient extends Closeable {
 	/**
 	 * run an event by event id
 	 *
-	 * @param eventId
+	 * @param eventId ID of event
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	void runEvent(Integer eventId) throws HSClientException;
@@ -172,8 +177,8 @@ public interface HSClient extends Closeable {
 	/**
 	 * run an event by group name and event name
 	 *
-	 * @param group
-	 * @param name
+	 * @param group group name
+	 * @param name name of event
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	void runEvent(String group, String name) throws HSClientException;

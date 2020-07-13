@@ -72,12 +72,11 @@ public class HSClientImpl implements HSClient {
 	}
 
 	/**
-	 * get children of device
+	 * get child devices of device
 	 *
-	 * @param device
+	 * @param device parent device
 	 * @return devices
-	 * @throws HSClientException
-	 * @throws IOException
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	@Override
 	public Map<Integer, Device> getChilden(Device device) throws HSClientException {
@@ -273,11 +272,10 @@ public class HSClientImpl implements HSClient {
 	}
 
 	/**
-	 * get root root and standalone devices
+	 * get root devices
 	 *
 	 * @return devices
-	 * @throws HSClientException
-	 * @throws IOException
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	@Override
 	public Map<Integer, Device> getRootDevices() throws HSClientException {
