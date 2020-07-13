@@ -10,7 +10,7 @@ package com.khubla.hsclient.domain.devicetype;
  * @author tom
  */
 public enum DeviceTypePlugin {
-	root(99);
+	root(99), onoffsensor(32), usb(2), switch_(17), entrycontol(64), switch2_(16);
 
 	public static DeviceTypePlugin valueOfLabel(Integer id) {
 		for (final DeviceTypePlugin e : values()) {
