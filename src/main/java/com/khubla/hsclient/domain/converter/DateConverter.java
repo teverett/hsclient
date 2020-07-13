@@ -1,4 +1,4 @@
-package com.khubla.hsclient.domain;
+package com.khubla.hsclient.domain.converter;
 
 import java.time.*;
 import java.util.*;

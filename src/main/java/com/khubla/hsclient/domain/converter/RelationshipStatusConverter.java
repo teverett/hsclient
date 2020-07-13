@@ -1,6 +1,7 @@
-package com.khubla.hsclient.domain;
+package com.khubla.hsclient.domain.converter;
 
 import com.fasterxml.jackson.databind.util.*;
+import com.khubla.hsclient.domain.*;
 
 /**
  * @author Tom Everett

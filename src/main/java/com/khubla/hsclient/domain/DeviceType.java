@@ -2,6 +2,7 @@ package com.khubla.hsclient.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.*;
+import com.khubla.hsclient.domain.converter.*;
 
 /**
  * @author Tom Everett

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.*;
 import com.khubla.hsclient.*;
+import com.khubla.hsclient.domain.converter.*;
 
 /**
  * @author Tom Everett
@@ -46,7 +47,8 @@ public class Device {
 	private String userAccess;
 	private String status_image;
 	private String voice_command;
-	private String misc;
+	@JsonDeserialize(converter = MiscConverter.class)
+	private Misc misc;
 	private String interface_name;
 	@JsonProperty("ControlPairs")
 	private List<ControlPair> controlPairs;
@@ -95,7 +97,7 @@ public class Device {
 		return location2;
 	}
 
-	public String getMisc() {
+	public Misc getMisc() {
 		return misc;
 	}
 
@@ -179,7 +181,7 @@ public class Device {
 		this.location2 = location2;
 	}
 
-	public void setMisc(String misc) {
+	public void setMisc(Misc misc) {
 		this.misc = misc;
 	}
 
