@@ -7,15 +7,15 @@
 package com.khubla.hsclient.domain;
 
 /**
- * http://help.homeseer.com/help/HS3/static/#.device_type
+ * http://help.homeseer.com/help/HS3/static/#.scripting_devices_deviceclass1
  *
  * @author tom
  */
-public enum APIType {
-	none(0), plugin(4), thermostat(16), media(32), security(8), sourceswitch(64), script(128);
+public enum RelationshipStatus {
+	notset(0), indeterminate(1), parentroot(2), standalone(3), child(4);
 
-	public static APIType valueOfLabel(Integer id) {
-		for (final APIType e : values()) {
+	public static RelationshipStatus valueOfLabel(Integer id) {
+		for (final RelationshipStatus e : values()) {
 			if (e.id == id) {
 				return e;
 			}
@@ -25,11 +25,11 @@ public enum APIType {
 
 	public final int id;
 
-	private APIType(int id) {
+	private RelationshipStatus(int id) {
 		this.id = id;
 	}
 
-	private APIType(String id) {
+	private RelationshipStatus(String id) {
 		this.id = Integer.parseInt(id);
 	}
 }

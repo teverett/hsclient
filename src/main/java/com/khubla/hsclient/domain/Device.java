@@ -33,7 +33,8 @@ public class Device {
 	private String device_type_string;
 	@JsonDeserialize(converter = DateConverter.class)
 	private Date last_change;
-	private Integer relationship;
+	@JsonDeserialize(converter = RelationshipStatusConverter.class)
+	private RelationshipStatus relationship;
 	private Boolean hide_from_view;
 	private List<Integer> associated_devices = new ArrayList<Integer>();
 	private DeviceType device_type;
@@ -106,7 +107,7 @@ public class Device {
 		return ref;
 	}
 
-	public Integer getRelationship() {
+	public RelationshipStatus getRelationship() {
 		return relationship;
 	}
 
@@ -190,7 +191,7 @@ public class Device {
 		this.ref = ref;
 	}
 
-	public void setRelationship(Integer relationship) {
+	public void setRelationship(RelationshipStatus relationship) {
 		this.relationship = relationship;
 	}
 

@@ -38,6 +38,15 @@ public interface HSClient extends Closeable {
 	Device controlDeviceByValue(Integer ref, double value) throws HSClientException;
 
 	/**
+	 * get child devices of device
+	 *
+	 * @param device
+	 * @return devices
+	 * @throws HSClientException
+	 */
+	Map<Integer, Device> getChilden(Device device) throws HSClientException;
+
+	/**
 	 * get value of counter
 	 *
 	 * @param name Name of counter
@@ -127,6 +136,14 @@ public interface HSClient extends Closeable {
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	List<String> getLocations2() throws HSClientException;
+
+	/**
+	 * get root devices
+	 *
+	 * @return devices
+	 * @throws HSClientException
+	 */
+	Map<Integer, Device> getRootDevices() throws HSClientException;
 
 	/**
 	 * get a setting

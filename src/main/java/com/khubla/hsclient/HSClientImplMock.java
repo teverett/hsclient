@@ -188,6 +188,12 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public Map<Integer, Device> getChilden(Device device) throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Counter getCounter(String name) throws HSClientException {
 		return countersByName.get(name);
 	}
@@ -245,6 +251,12 @@ public class HSClientImplMock implements HSClient {
 
 	@Override
 	public List<String> getLocations2() throws HSClientException {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, Device> getRootDevices() throws HSClientException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

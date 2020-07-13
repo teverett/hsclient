@@ -50,8 +50,9 @@ public class HSClientImpl implements HSClient {
 				}
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -65,8 +66,38 @@ public class HSClientImpl implements HSClient {
 				}
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
+	}
+
+	/**
+	 * get children of device
+	 *
+	 * @param device
+	 * @return devices
+	 * @throws HSClientException
+	 * @throws IOException
+	 */
+	@Override
+	public Map<Integer, Device> getChilden(Device device) throws HSClientException {
+		if (null != hsJSONClient) {
+			if ((null != device) && (null != device.getAssociated_devices()) && (device.getAssociated_devices().size() > 0)) {
+				final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+				if (null != device.getAssociated_devices()) {
+					for (final Integer refId : device.getAssociated_devices()) {
+						final Device childDevice = getDevice(refId);
+						if (childDevice.getRelationship() == RelationshipStatus.child) {
+							ret.put(device.getRef(), device);
+						}
+					}
+				}
+				return ret;
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override
@@ -79,8 +110,9 @@ public class HSClientImpl implements HSClient {
 				}
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -91,8 +123,9 @@ public class HSClientImpl implements HSClient {
 				return statusResponse.getDevices().get(0);
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -103,8 +136,9 @@ public class HSClientImpl implements HSClient {
 				return controlResponse.getDevices().get(0);
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -119,8 +153,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -135,8 +170,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -151,8 +187,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -167,8 +204,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -186,8 +224,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -202,8 +241,9 @@ public class HSClientImpl implements HSClient {
 				return ret;
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -214,8 +254,9 @@ public class HSClientImpl implements HSClient {
 				return locationsResponse.getLocation1();
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -226,8 +267,34 @@ public class HSClientImpl implements HSClient {
 				return locationsResponse.getLocation2();
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
+	}
+
+	/**
+	 * get root root and standalone devices
+	 *
+	 * @return devices
+	 * @throws HSClientException
+	 * @throws IOException
+	 */
+	@Override
+	public Map<Integer, Device> getRootDevices() throws HSClientException {
+		if (null != hsJSONClient) {
+			final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+			final Map<Integer, Device> devices = getDevicesByRef();
+			if (null != devices) {
+				for (final Device device : devices.values()) {
+					if ((device.getRelationship() == RelationshipStatus.parentroot) || (device.getRelationship() == RelationshipStatus.standalone)) {
+						ret.put(device.getRef(), device);
+					}
+				}
+			}
+			return ret;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override
@@ -238,8 +305,9 @@ public class HSClientImpl implements HSClient {
 				return settingResponse.getValue();
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
@@ -250,31 +318,35 @@ public class HSClientImpl implements HSClient {
 				return statusResponse.getVersion();
 			}
 			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void runEvent(Integer eventId) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.runEvent(eventId);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void runEvent(String group, String name) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.runEvent(group, name);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 
 	@Override
 	public void speak(String phrase, String host) throws HSClientException {
 		if (null != hsJSONClient) {
 			hsJSONClient.speak(phrase, host);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
 		}
-		throw new HSClientException(NOT_CONNECTED);
 	}
 }
