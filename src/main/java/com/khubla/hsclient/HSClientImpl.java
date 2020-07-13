@@ -88,7 +88,7 @@ public class HSClientImpl implements HSClient {
 					for (final Integer refId : device.getAssociated_devices()) {
 						final Device childDevice = getDevice(refId);
 						if (childDevice.getRelationship() == RelationshipStatus.child) {
-							ret.put(device.getRef(), device);
+							ret.put(childDevice.getRef(), childDevice);
 						}
 					}
 				}
