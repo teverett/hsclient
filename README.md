@@ -7,7 +7,7 @@
 
 A Java client for the HomeSeer JSON API.
 
-The client was built based on [this documentation](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and tested against `HS3 Pro (SEL) Edition 3.0.0.548`
+The client was built based on [this documentation](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and tested against `HS3 Pro (SEL) Edition 3.0.0.548` and `HS3 Pro (SEL) Edition 3.0.0.550`
 
 ## License
 
