@@ -309,6 +309,25 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
+		if (null != hsJSONClient) {
+			if ((null != deviceType) && (null != device)) {
+				final Map<Integer, Device> children = getChilden(device);
+				if (null != children) {
+					for (final Device child : children.values()) {
+						if (child.getDevice_type_string().compareTo(deviceType) == 0) {
+							return child;
+						}
+					}
+				}
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
 	public String getVersion() throws HSClientException {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);

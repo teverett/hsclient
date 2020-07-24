@@ -269,6 +269,12 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String getVersion() throws HSClientException {
 		return "1.0";
 	}

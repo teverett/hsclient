@@ -14,7 +14,7 @@ import com.khubla.hsclient.domain.*;
 public interface HSClient extends Closeable {
 	/**
 	 * connect
-	 * 
+	 *
 	 * @param hsConfiguration config
 	 * @throws HSClientException exception connecting
 	 * @throws IOException exception connecting
@@ -157,6 +157,15 @@ public interface HSClient extends Closeable {
 	 * @return setting value
 	 */
 	String getSetting(String name) throws HSClientException;
+
+	/**
+	 * gets the subdevice of current device by value of "getDevice_SubType_Description"
+	 *
+	 * @param deviceType
+	 * @return device or null
+	 * @throws HSClientException
+	 */
+	Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException;
 
 	/**
 	 * get HS JSON API version
