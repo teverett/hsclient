@@ -27,7 +27,7 @@ hsclient is distributed under the BSD 3-Clause License.
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.11</version>
+   <version>1.12</version>
 </dependency>
 ```
 
