@@ -53,7 +53,7 @@ public interface HSClient extends Closeable {
 	 * @param camid camera id
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
-	void getCameraSnapshot(String camid) throws HSClientException;
+	String getCameraSnapshot(String camid) throws HSClientException;
 
 	/**
 	 * @return list of device ids

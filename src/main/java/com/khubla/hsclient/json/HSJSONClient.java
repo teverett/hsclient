@@ -174,10 +174,16 @@ public class HSJSONClient implements Closeable {
 		return null;
 	}
 
-	public void getCameraSnapshot(String camid) throws HSClientException {
+	public CameraSnapshotResponse getCameraSnapshot(String camid) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("camid", camid);
-		executeGETQuery("getcamerasnapshot", parameters);
+		final HTTPResponse httpResponse = executeGETQuery("getcamerasnapshot", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return CameraSnapshotResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getcamerasnapshot returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
 	}
 
 	public ChangedDevicesResponse getChangedDevices() throws HSClientException {

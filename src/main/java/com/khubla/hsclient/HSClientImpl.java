@@ -85,9 +85,13 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void getCameraSnapshot(String camid) throws HSClientException {
+	public String getCameraSnapshot(String camid) throws HSClientException {
 		if (null != hsJSONClient) {
-			hsJSONClient.getCameraSnapshot(camid);
+			final CameraSnapshotResponse cameraSnapshotResponse = hsJSONClient.getCameraSnapshot(camid);
+			if (null != cameraSnapshotResponse) {
+				return cameraSnapshotResponse.getSnapShot();
+			}
+			return null;
 		} else {
 			throw new HSClientException(NOT_CONNECTED);
 		}

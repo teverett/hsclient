@@ -194,8 +194,8 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public void getCameraSnapshot(String camid) throws HSClientException {
-		// TODO Auto-generated method stub
+	public String getCameraSnapshot(String camid) throws HSClientException {
+		return null;
 	}
 
 	@Override
