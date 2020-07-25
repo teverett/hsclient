@@ -46,6 +46,10 @@ public class HSJSONClient implements Closeable {
 	}
 
 	/**
+	 * ALL
+	 */
+	private static final String ALL = "all";
+	/**
 	 * logger
 	 */
 	private static Logger logger = LoggerFactory.getLogger(HSJSONClient.class);
@@ -152,6 +156,8 @@ public class HSJSONClient implements Closeable {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		if (null != ref) {
 			parameters.put("ref", Integer.toString(ref));
+		} else {
+			parameters.put("ref", ALL);
 		}
 		final HTTPResponse httpResponse = executeGETQuery("getcontrol", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {

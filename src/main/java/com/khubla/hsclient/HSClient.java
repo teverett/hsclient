@@ -78,29 +78,13 @@ public interface HSClient extends Closeable {
 	Device getDevice(Integer ref) throws HSClientException;
 
 	/**
-	 * get a device with controls, by ref
+	 * get a device control pairs, by ref
 	 *
-	 * @param ref reference id of device
-	 * @return Device
+	 * @param ref reference id of device. Pass null for ref to get controls for all devices
+	 * @return Control Pairs
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
-	Device getDeviceControls(Integer ref) throws HSClientException;
-
-	/**
-	 * get all devices with controls
-	 *
-	 * @return Map of devices by device name
-	 * @throws HSClientException Exception encountered communicating with HomeSeer
-	 */
-	Map<String, Device> getDeviceControlsByName() throws HSClientException;
-
-	/**
-	 * get all devices by reference id
-	 *
-	 * @return Map of devices by reference number
-	 * @throws HSClientException Exception encountered communicating with HomeSeer
-	 */
-	Map<Integer, Device> getDeviceControlsByRef() throws HSClientException;
+	List<ControlPair> getDeviceControls(Integer ref) throws HSClientException;
 
 	/**
 	 * get all devices by name

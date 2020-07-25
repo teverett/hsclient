@@ -7,7 +7,11 @@
 
 A Java client for the HomeSeer JSON API.
 
-The client was built based on [this documentation](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and tested against:
+The java interface API is here [HSClient.java](https://github.com/teverett/hsclient/blob/master/src/main/java/com/khubla/hsclient/HSClient.java)
+
+The client was built based on [this documentation](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and [this](https://help.homeseer.com/help/HS3SDK/static/default.htm#.controlling_with_json)
+
+HomeSeer versions hsClient was tested against include:
 
 * HS4 version 4.1.2.0
 * HS3 Pro (SEL) Edition 3.0.0.548

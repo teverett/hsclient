@@ -147,45 +147,11 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public Device getDeviceControls(Integer ref) throws HSClientException {
+	public List<ControlPair> getDeviceControls(Integer ref) throws HSClientException {
 		if (null != hsJSONClient) {
-			final ControlResponse controlResponse = hsJSONClient.getControl(null);
+			final ControlResponse controlResponse = hsJSONClient.getControl(ref);
 			if (null != controlResponse) {
-				return controlResponse.getDevices().get(0);
-			}
-			return null;
-		} else {
-			throw new HSClientException(NOT_CONNECTED);
-		}
-	}
-
-	@Override
-	public Map<String, Device> getDeviceControlsByName() throws HSClientException {
-		if (null != hsJSONClient) {
-			final ControlResponse controlResponse = hsJSONClient.getControl(null);
-			if (null != controlResponse) {
-				final Map<String, Device> ret = new HashMap<String, Device>();
-				for (final Device device : controlResponse.getDevices()) {
-					ret.put(device.getName(), device);
-				}
-				return ret;
-			}
-			return null;
-		} else {
-			throw new HSClientException(NOT_CONNECTED);
-		}
-	}
-
-	@Override
-	public Map<Integer, Device> getDeviceControlsByRef() throws HSClientException {
-		if (null != hsJSONClient) {
-			final ControlResponse controlResponse = hsJSONClient.getControl(null);
-			if (null != controlResponse) {
-				final Map<Integer, Device> ret = new HashMap<Integer, Device>();
-				for (final Device device : controlResponse.getDevices()) {
-					ret.put(device.getRef(), device);
-				}
-				return ret;
+				return controlResponse.getControlPairs();
 			}
 			return null;
 		} else {

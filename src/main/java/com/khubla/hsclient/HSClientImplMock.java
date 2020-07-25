@@ -210,17 +210,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public Device getDeviceControls(Integer ref) throws HSClientException {
-		return null;
-	}
-
-	@Override
-	public Map<String, Device> getDeviceControlsByName() throws HSClientException {
-		return null;
-	}
-
-	@Override
-	public Map<Integer, Device> getDeviceControlsByRef() throws HSClientException {
+	public List<ControlPair> getDeviceControls(Integer ref) throws HSClientException {
 		return null;
 	}
 

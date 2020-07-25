@@ -1,10 +1,6 @@
 package com.khubla.hsclient;
 
-import java.util.*;
-
 import org.junit.*;
-
-import com.khubla.hsclient.domain.*;
 
 /**
  * @author Tom Everett
@@ -20,8 +16,8 @@ public class TestGetControls extends AbstractTest {
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
-			final Map<String, Device> devices = hsClient.getDeviceControlsByName();
-			Assert.assertNotNull(devices);
+			// final Map<String, Device> devices = hsClient.getControl(ref)
+			// Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
 			Assert.fail();
