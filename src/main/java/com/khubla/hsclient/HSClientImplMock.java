@@ -264,7 +264,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public byte[] getImage(String path) throws HSClientException {
+	public String getImage(String path) throws HSClientException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -339,8 +339,8 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public void register(String license, String password, String licenseold, String passold) throws HSClientException {
-		// TODO Auto-generated method stub
+	public boolean register(Integer license, String password, Integer licenseold, String passold) throws HSClientException {
+		return false;
 	}
 
 	@Override
@@ -365,7 +365,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public void updatePlugin(String pluginName) throws HSClientException {
-		// TODO Auto-generated method stub
+	public boolean updatePlugin(String pluginName) throws HSClientException {
+		return false;
 	}
 }

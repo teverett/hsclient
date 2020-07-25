@@ -288,8 +288,18 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public byte[] getImage(String path) throws HSClientException {
-		throw new HSClientException("Not Implemented");
+	public String getImage(String path) throws HSClientException {
+		if (null != hsJSONClient) {
+			final GetImageResponse getImageResponse = hsJSONClient.getImage(path);
+			if (null != getImageResponse) {
+				if (getImageResponse.getResponse().compareTo("ok") == 0) {
+					return getImageResponse.getFileBase64();
+				}
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override
@@ -435,8 +445,20 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void register(String license, String password, String licenseold, String passold) throws HSClientException {
-		throw new HSClientException("Not Implemented");
+	public boolean register(Integer license, String password, Integer licenseold, String passold) throws HSClientException {
+		if (null != hsJSONClient) {
+			final RegisterLicenseResponse registerLicenseResponse = hsJSONClient.register(license, password, licenseold, passold);
+			if (null != registerLicenseResponse) {
+				if (null != registerLicenseResponse.getResponse()) {
+					if (registerLicenseResponse.getResponse().compareTo("Registration successful") == 0) {
+						return true;
+					}
+				}
+			}
+			return false;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override
@@ -467,7 +489,19 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void updatePlugin(String pluginName) throws HSClientException {
-		throw new HSClientException("Not Implemented");
+	public boolean updatePlugin(String pluginName) throws HSClientException {
+		if (null != hsJSONClient) {
+			final UpdatePluginResponse updatePluginResponse = hsJSONClient.updatePlugin(pluginName);
+			if (null != updatePluginResponse) {
+				if (null != updatePluginResponse.getResponse()) {
+					if (updatePluginResponse.getResponse().compareTo("Success, plugin install completed") == 0) {
+						return true;
+					}
+				}
+			}
+			return false;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 }

@@ -256,6 +256,18 @@ public class HSJSONClient implements Closeable {
 		return httpClient;
 	}
 
+	public GetImageResponse getImage(String path) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("path", path);
+		final HTTPResponse httpResponse = executeGETQuery("getimage", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return GetImageResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getimage returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
 	public LocationsResponse getLocations() throws HSClientException {
 		final HTTPResponse httpResponse = executeGETQuery("getlocations", null);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
@@ -382,6 +394,21 @@ public class HSJSONClient implements Closeable {
 		}
 	}
 
+	public RegisterLicenseResponse register(Integer license, String password, Integer licenseold, String passold) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("license", license.toString());
+		parameters.put("password", password);
+		parameters.put("licenseold", licenseold.toString());
+		parameters.put("passold", passold);
+		final HTTPResponse httpResponse = executeGETQuery("register", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return RegisterLicenseResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query register returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
 	public void runEvent(Integer eventid) throws HSClientException {
 		final Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("eventid", Integer.toString(eventid));
@@ -408,5 +435,17 @@ public class HSJSONClient implements Closeable {
 		parameters.put("phrase", phrase);
 		parameters.put("host", host);
 		executeGETQuery("speak", parameters);
+	}
+
+	public UpdatePluginResponse updatePlugin(String pluginName) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("plugin", pluginName);
+		final HTTPResponse httpResponse = executeGETQuery("updateplugin", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return UpdatePluginResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query updateplugin returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
 	}
 }
