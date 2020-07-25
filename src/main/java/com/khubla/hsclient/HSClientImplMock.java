@@ -188,6 +188,23 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public List<Camera> getCameras() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void getCameraSnapshot(String camid) throws HSClientException {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public List<Integer> getChangedDevices() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
 		// TODO Auto-generated method stub
 		return null;
@@ -215,6 +232,12 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public DeviceInfo getDeviceInfo() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Map<String, Device> getDevicesByName() throws HSClientException {
 		return devicesByName;
 	}
@@ -235,6 +258,18 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public String getHSVersion() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] getImage(String path) throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<String> getLocations1() throws HSClientException {
 		final List<String> locations = new ArrayList<String>();
 		for (final Device device : devicesByRef.values()) {
@@ -247,6 +282,18 @@ public class HSClientImplMock implements HSClient {
 
 	@Override
 	public List<String> getLocations2() throws HSClientException {
+		return null;
+	}
+
+	@Override
+	public List<Plugin> getPlugins() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPluginVersion(String pluginName) throws HSClientException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -271,8 +318,29 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public List<HSSystem> getSystems() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String getVersion() throws HSClientException {
 		return "1.0";
+	}
+
+	@Override
+	public void panCamera(String direction, String camid) throws HSClientException {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String pluginfunction(String functionName, String plugin, String instance, Map<String, String> parameters) throws HSClientException {
+		return null;
+	}
+
+	@Override
+	public void register(String license, String password, String licenseold, String passold) throws HSClientException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -294,5 +362,10 @@ public class HSClientImplMock implements HSClient {
 		/*
 		 * intentionally empty
 		 */
+	}
+
+	@Override
+	public void updatePlugin(String pluginName) throws HSClientException {
+		// TODO Auto-generated method stub
 	}
 }

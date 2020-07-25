@@ -42,6 +42,26 @@ public interface HSClient extends Closeable {
 	Device controlDeviceByValue(Integer ref, double value) throws HSClientException;
 
 	/**
+	 * @return List of cameras
+	 * @throws HSClientException
+	 */
+	List<Camera> getCameras() throws HSClientException;
+
+	/**
+	 * get camera snapshot
+	 *
+	 * @param camid camera id
+	 * @throws HSClientException
+	 */
+	void getCameraSnapshot(String camid) throws HSClientException;
+
+	/**
+	 * @return list of device ids
+	 * @throws HSClientException
+	 */
+	List<Integer> getChangedDevices() throws HSClientException;
+
+	/**
 	 * gets the subdevice of current device by value of "getDevice_SubType_Description"
 	 *
 	 * @param deviceType
@@ -87,6 +107,14 @@ public interface HSClient extends Closeable {
 	List<ControlPair> getDeviceControls(Integer ref) throws HSClientException;
 
 	/**
+	 * get device info
+	 *
+	 * @return DeviceInfo
+	 * @throws HSClientException
+	 */
+	DeviceInfo getDeviceInfo() throws HSClientException;
+
+	/**
 	 * get all devices by name
 	 *
 	 * @return Map of devices by device name
@@ -119,6 +147,21 @@ public interface HSClient extends Closeable {
 	Map<Integer, Event> getEventsById() throws HSClientException;
 
 	/**
+	 * @return HomeSeer version
+	 * @throws HSClientException
+	 */
+	String getHSVersion() throws HSClientException;
+
+	/**
+	 * get image
+	 *
+	 * @param path Image path
+	 * @return
+	 * @throws HSClientException
+	 */
+	byte[] getImage(String path) throws HSClientException;
+
+	/**
 	 * get all locations1
 	 *
 	 * @return list of location names
@@ -133,6 +176,19 @@ public interface HSClient extends Closeable {
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	List<String> getLocations2() throws HSClientException;
+
+	/**
+	 * @return list of plugins
+	 * @throws HSClientException
+	 */
+	List<Plugin> getPlugins() throws HSClientException;
+
+	/**
+	 * @param pluginName
+	 * @return plugin version number
+	 * @throws HSClientException
+	 */
+	String getPluginVersion(String pluginName) throws HSClientException;
 
 	/**
 	 * get root devices
@@ -160,12 +216,51 @@ public interface HSClient extends Closeable {
 	String getSetting(String name) throws HSClientException;
 
 	/**
+	 * get all HomeSeer Systems
+	 *
+	 * @return list of systems
+	 * @throws HSClientException
+	 */
+	List<HSSystem> getSystems() throws HSClientException;
+
+	/**
 	 * get HS JSON API version
 	 *
 	 * @return version string
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	String getVersion() throws HSClientException;
+
+	/**
+	 * pan camera
+	 *
+	 * @param direction plan direction
+	 * @param camid camera id
+	 * @throws HSClientException
+	 */
+	void panCamera(String direction, String camid) throws HSClientException;
+
+	/**
+	 * execute plugin function
+	 *
+	 * @param functionName function name
+	 * @param plugin plugin name
+	 * @param instance plugin instance
+	 * @param parameters function parameters
+	 * @throws HSClientException
+	 */
+	String pluginfunction(String functionName, String plugin, String instance, Map<String, String> parameters) throws HSClientException;
+
+	/**
+	 * register HS
+	 *
+	 * @param license License
+	 * @param password password
+	 * @param licenseold old license id
+	 * @param passold old password
+	 * @throws HSClientException
+	 */
+	void register(String license, String password, String licenseold, String passold) throws HSClientException;
 
 	/**
 	 * run an event by event id
@@ -192,4 +287,12 @@ public interface HSClient extends Closeable {
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	void speak(String phrase, String host) throws HSClientException;
+
+	/**
+	 * update plugin
+	 *
+	 * @param pluginName
+	 * @throws HSClientException
+	 */
+	void updatePlugin(String pluginName) throws HSClientException;
 }

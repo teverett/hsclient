@@ -72,6 +72,37 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public List<Camera> getCameras() throws HSClientException {
+		if (null != hsJSONClient) {
+			final CamerasResponse camerasResponse = hsJSONClient.getCameras();
+			if (null != camerasResponse) {
+				return camerasResponse.getCameras();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
+	public void getCameraSnapshot(String camid) throws HSClientException {
+		throw new HSClientException("Not Implemented");
+	}
+
+	@Override
+	public List<Integer> getChangedDevices() throws HSClientException {
+		if (null != hsJSONClient) {
+			final ChangedDevicesResponse changedDevicesResponse = hsJSONClient.getChangedDevices();
+			if (null != changedDevicesResponse) {
+				return changedDevicesResponse.getRefs();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
 	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
 		if (null != hsJSONClient) {
 			if ((null != deviceType) && (null != device)) {
@@ -160,6 +191,15 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public DeviceInfo getDeviceInfo() throws HSClientException {
+		if (null != hsJSONClient) {
+			return hsJSONClient.getDeviceInfo();
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
 	public Map<String, Device> getDevicesByName() throws HSClientException {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
@@ -231,6 +271,24 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public String getHSVersion() throws HSClientException {
+		if (null != hsJSONClient) {
+			final HSVersionResponse hsVersionResponse = hsJSONClient.getHSVersion();
+			if (null != hsVersionResponse) {
+				return hsVersionResponse.getResponse();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
+	public byte[] getImage(String path) throws HSClientException {
+		throw new HSClientException("Not Implemented");
+	}
+
+	@Override
 	public List<String> getLocations1() throws HSClientException {
 		if (null != hsJSONClient) {
 			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
@@ -249,6 +307,32 @@ public class HSClientImpl implements HSClient {
 			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
 			if (null != locationsResponse) {
 				return locationsResponse.getLocation2();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
+	public List<Plugin> getPlugins() throws HSClientException {
+		if (null != hsJSONClient) {
+			final PluginsResponse pluginsResponse = hsJSONClient.getPlugins();
+			if (null != pluginsResponse) {
+				return pluginsResponse.getPlugins();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
+	public String getPluginVersion(String pluginName) throws HSClientException {
+		if (null != hsJSONClient) {
+			final PluginVersionResponse pluginVersionResponse = hsJSONClient.getPluginVersion(pluginName);
+			if (null != pluginVersionResponse) {
+				return pluginVersionResponse.getResponse();
 			}
 			return null;
 		} else {
@@ -303,6 +387,19 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public List<HSSystem> getSystems() throws HSClientException {
+		if (null != hsJSONClient) {
+			final SystemsResponse systemsResponse = hsJSONClient.getSystems();
+			if (null != systemsResponse) {
+				return systemsResponse.getSystems();
+			}
+			return null;
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
 	public String getVersion() throws HSClientException {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
@@ -313,6 +410,25 @@ public class HSClientImpl implements HSClient {
 		} else {
 			throw new HSClientException(NOT_CONNECTED);
 		}
+	}
+
+	@Override
+	public void panCamera(String direction, String camid) throws HSClientException {
+		throw new HSClientException("Not Implemented");
+	}
+
+	@Override
+	public String pluginfunction(String functionName, String plugin, String instance, Map<String, String> parameters) throws HSClientException {
+		if (null != hsJSONClient) {
+			return hsJSONClient.pluginfunction(functionName, plugin, instance, parameters);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
+	public void register(String license, String password, String licenseold, String passold) throws HSClientException {
+		throw new HSClientException("Not Implemented");
 	}
 
 	@Override
@@ -340,5 +456,10 @@ public class HSClientImpl implements HSClient {
 		} else {
 			throw new HSClientException(NOT_CONNECTED);
 		}
+	}
+
+	@Override
+	public void updatePlugin(String pluginName) throws HSClientException {
+		throw new HSClientException("Not Implemented");
 	}
 }

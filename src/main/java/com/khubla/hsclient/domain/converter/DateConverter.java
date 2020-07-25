@@ -17,7 +17,13 @@ public class DateConverter extends StdConverter<String, Date> {
 		if (null != value) {
 			final String dateString = value.substring(value.indexOf("(") + 1, value.indexOf(")"));
 			if (false == dateString.startsWith("-")) {
-				final String time = dateString.substring(0, dateString.indexOf("-"));
+				final int idxOfTZ = dateString.indexOf("-");
+				String time;
+				if (-1 != idxOfTZ) {
+					time = dateString.substring(0, idxOfTZ);
+				} else {
+					time = dateString;
+				}
 				final Instant instant = Instant.ofEpochMilli(Long.parseLong(time));
 				return Date.from(instant);
 			}

@@ -54,6 +54,10 @@ public class HSJSONClient implements Closeable {
 	 */
 	private static Logger logger = LoggerFactory.getLogger(HSJSONClient.class);
 	/**
+	 * changed device id, for the "getdeviceschanged" API
+	 */
+	private static String DEVICE_CHANGE_ID = UUID.randomUUID().toString();
+	/**
 	 * user
 	 */
 	private static final String USER = "user";
@@ -65,6 +69,10 @@ public class HSJSONClient implements Closeable {
 	 * request
 	 */
 	private static final String REQUEST = "request";
+	/**
+	 * pass username and password as http parameters
+	 */
+	private boolean passCredentialsAsHTTPParameters = false;
 	/**
 	 * HS URL
 	 */
@@ -127,13 +135,17 @@ public class HSJSONClient implements Closeable {
 	private HTTPResponse executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
 		try {
 			final URIBuilder builder = new URIBuilder(url);
-			builder.setParameter(USER, username).setParameter(PASS, password).addParameter(REQUEST, command);
+			if (true == passCredentialsAsHTTPParameters) {
+				builder.setParameter(USER, username).setParameter(PASS, password);
+			}
+			builder.addParameter(REQUEST, command);
 			if (null != parameters) {
 				for (final String k : parameters.keySet()) {
 					builder.setParameter(k, parameters.get(k));
 				}
 			}
 			final HttpGet request = new HttpGet(builder.build());
+			System.out.println(request.toString());
 			final CloseableHttpResponse response = httpClient.execute(request);
 			try {
 				final HttpEntity entity = response.getEntity();
@@ -150,6 +162,28 @@ public class HSJSONClient implements Closeable {
 			logger.error("Exception running command '" + command + "'", e);
 			throw new HSClientException("Exception running command '" + command + "'", e);
 		}
+	}
+
+	public CamerasResponse getCameras() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("getcameras", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return CamerasResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getcameras returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
+	public ChangedDevicesResponse getChangedDevices() throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("devicechangeid", DEVICE_CHANGE_ID);
+		final HTTPResponse httpResponse = executeGETQuery("getdeviceschanged", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return ChangedDevicesResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getdeviceschanged returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
 	}
 
 	public ControlResponse getControl(Integer ref) throws HSClientException {
@@ -182,12 +216,32 @@ public class HSJSONClient implements Closeable {
 		return null;
 	}
 
+	public DeviceInfo getDeviceInfo() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("getdeviceinfo", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return DeviceInfo.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getdeviceinfo returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
 	public EventsResponse getEvents() throws HSClientException {
 		final HTTPResponse httpResponse = executeGETQuery("getevents", null);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return EventsResponse.parse(httpResponse.getHttpEntity());
 		} else {
 			logger.error("Query getevents returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
+	public HSVersionResponse getHSVersion() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("hsversion", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return HSVersionResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query hsversion returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -208,6 +262,28 @@ public class HSJSONClient implements Closeable {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public PluginsResponse getPlugins() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("pluginlist", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return PluginsResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query pluginlist returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
+	public PluginVersionResponse getPluginVersion(String pluginName) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("plugin", pluginName);
+		final HTTPResponse httpResponse = executeGETQuery("pluginversion", parameters);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return PluginVersionResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query pluginversion returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
 	}
 
 	public SessionConfig getSessionConfig() throws HSClientException {
@@ -252,12 +328,45 @@ public class HSJSONClient implements Closeable {
 		return null;
 	}
 
+	public SystemsResponse getSystems() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("getsystems", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return SystemsResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getsystems returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
+	}
+
 	public String getUrl() {
 		return url;
 	}
 
 	public String getUsername() {
 		return username;
+	}
+
+	public boolean isPassCredentialsAsHTTPParameters() {
+		return passCredentialsAsHTTPParameters;
+	}
+
+	public String pluginfunction(String functionName, String plugin, String instance, Map<String, String> parameters) throws HSClientException {
+		final Map<String, String> parms = new HashMap<String, String>();
+		if (null != parameters) {
+			parms.putAll(parameters);
+		}
+		parms.put("function", functionName);
+		parms.put("plugin", plugin);
+		if (null != instance) {
+			parms.put("instance", instance);
+		}
+		final HTTPResponse httpResponse = executeGETQuery("pluginfunction", parms);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return httpResponse.getHttpEntity();
+		} else {
+			logger.error("Query pluginfunction returned HTTP " + httpResponse.getHttpCode());
+			return null;
+		}
 	}
 
 	public void runEvent(Integer eventid) throws HSClientException {
@@ -275,6 +384,10 @@ public class HSJSONClient implements Closeable {
 
 	public void setHttpClient(CloseableHttpClient httpClient) {
 		this.httpClient = httpClient;
+	}
+
+	public void setPassCredentialsAsHTTPParameters(boolean passCredentialsAsHTTPParameters) {
+		this.passCredentialsAsHTTPParameters = passCredentialsAsHTTPParameters;
 	}
 
 	public void speak(String phrase, String host) throws HSClientException {
