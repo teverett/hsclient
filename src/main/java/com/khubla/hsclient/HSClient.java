@@ -42,6 +42,15 @@ public interface HSClient extends Closeable {
 	Device controlDeviceByValue(Integer ref, double value) throws HSClientException;
 
 	/**
+	 * gets the subdevice of current device by value of "getDevice_SubType_Description"
+	 *
+	 * @param deviceType
+	 * @return device or null
+	 * @throws HSClientException
+	 */
+	Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException;
+
+	/**
 	 * get child devices of device
 	 *
 	 * @param device parent device
@@ -157,15 +166,6 @@ public interface HSClient extends Closeable {
 	 * @return setting value
 	 */
 	String getSetting(String name) throws HSClientException;
-
-	/**
-	 * gets the subdevice of current device by value of "getDevice_SubType_Description"
-	 *
-	 * @param deviceType
-	 * @return device or null
-	 * @throws HSClientException
-	 */
-	Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException;
 
 	/**
 	 * get HS JSON API version

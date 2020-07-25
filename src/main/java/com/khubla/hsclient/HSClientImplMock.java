@@ -188,6 +188,12 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Map<Integer, Device> getChilden(Device device) throws HSClientException {
 		// TODO Auto-generated method stub
 		return null;
@@ -265,12 +271,6 @@ public class HSClientImplMock implements HSClient {
 		/*
 		 * intentionally empty, for now
 		 */
-		return null;
-	}
-
-	@Override
-	public Device getChildDeviceByDeviceType(Device device, String deviceType) throws HSClientException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

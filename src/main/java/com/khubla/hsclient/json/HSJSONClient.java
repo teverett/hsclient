@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 
 import org.apache.http.*;
+import org.apache.http.auth.*;
+import org.apache.http.client.*;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.*;
 import org.apache.http.impl.client.*;
@@ -73,13 +75,17 @@ public class HSJSONClient implements Closeable {
 	/**
 	 * HTTP Client
 	 */
-	private CloseableHttpClient httpClient = HttpClients.createDefault();
+	private CloseableHttpClient httpClient;
 
 	public HSJSONClient(String url, String username, String password) {
 		super();
 		this.url = url;
 		this.username = username;
 		this.password = password;
+		final CredentialsProvider provider = new BasicCredentialsProvider();
+		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
+		provider.setCredentials(AuthScope.ANY, credentials);
+		httpClient = HttpClientBuilder.create().setDefaultCredentialsProvider(provider).build();
 	}
 
 	@Override
@@ -94,6 +100,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebylabel", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return DeviceResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query controldevicebylabel returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -105,6 +113,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("controldevicebyvalue", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return DeviceResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query controldevicebyvalue returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -145,6 +155,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getcontrol", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return ControlResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getcontrol returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -157,6 +169,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getcounter", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return CountersResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getcounter returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -165,6 +179,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getevents", null);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return EventsResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getevents returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -177,6 +193,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getlocations", null);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return LocationsResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getLocations returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -191,6 +209,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getsetting", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return SettingResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getSetting returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
@@ -209,6 +229,8 @@ public class HSJSONClient implements Closeable {
 		final HTTPResponse httpResponse = executeGETQuery("getstatus", parameters);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return StatusResponse.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getstatus returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
 	}
