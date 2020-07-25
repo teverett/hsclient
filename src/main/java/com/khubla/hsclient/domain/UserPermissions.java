@@ -1,7 +1,9 @@
 package com.khubla.hsclient.domain;
 
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.annotation.*;
 import com.khubla.hsclient.*;
+import com.khubla.hsclient.domain.converter.*;
 
 /**
  * @author Tom Everett
@@ -19,7 +21,8 @@ public class UserPermissions {
 		}
 	}
 
-	private String user_permissions;
+	@JsonDeserialize(converter = UserRightConverter.class)
+	private UserRight user_permissions;
 	private Boolean user_permissions_valid;
 	private Boolean eventAccess;
 	private Boolean cameraAdd;
@@ -32,7 +35,7 @@ public class UserPermissions {
 		return eventAccess;
 	}
 
-	public String getUser_permissions() {
+	public UserRight getUser_permissions() {
 		return user_permissions;
 	}
 
@@ -48,7 +51,7 @@ public class UserPermissions {
 		this.eventAccess = eventAccess;
 	}
 
-	public void setUser_permissions(String user_permissions) {
+	public void setUser_permissions(UserRight user_permissions) {
 		this.user_permissions = user_permissions;
 	}
 
