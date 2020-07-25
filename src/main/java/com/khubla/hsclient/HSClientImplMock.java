@@ -267,6 +267,12 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
+	public SessionConfig getSessionConfig() throws HSClientException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String getSetting(String name) throws HSClientException {
 		/*
 		 * intentionally empty, for now

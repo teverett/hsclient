@@ -13,6 +13,7 @@ import org.apache.http.util.*;
 import org.slf4j.*;
 
 import com.khubla.hsclient.*;
+import com.khubla.hsclient.domain.*;
 import com.khubla.hsclient.json.response.*;
 
 /**
@@ -201,6 +202,16 @@ public class HSJSONClient implements Closeable {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public SessionConfig getSessionConfig() throws HSClientException {
+		final HTTPResponse httpResponse = executeGETQuery("getsessionconfig", null);
+		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
+			return SessionConfig.parse(httpResponse.getHttpEntity());
+		} else {
+			logger.error("Query getsessionconfig returned HTTP " + httpResponse.getHttpCode());
+		}
+		return null;
 	}
 
 	public SettingResponse getSetting(String setting) throws HSClientException {

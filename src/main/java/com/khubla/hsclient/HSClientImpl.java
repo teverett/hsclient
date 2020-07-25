@@ -315,6 +315,15 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
+	public SessionConfig getSessionConfig() throws HSClientException {
+		if (null != hsJSONClient) {
+			return hsJSONClient.getSessionConfig();
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
+	}
+
+	@Override
 	public String getSetting(String name) throws HSClientException {
 		if (null != hsJSONClient) {
 			final SettingResponse settingResponse = hsJSONClient.getSetting(name);

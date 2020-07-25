@@ -159,6 +159,14 @@ public interface HSClient extends Closeable {
 	Map<Integer, Device> getRootDevices() throws HSClientException;
 
 	/**
+	 * Get the session config
+	 *
+	 * @return SessionConfig
+	 * @throws HSClientException
+	 */
+	SessionConfig getSessionConfig() throws HSClientException;
+
+	/**
 	 * get a setting
 	 *
 	 * @param name of setting
