@@ -329,7 +329,7 @@ public class HSClientImplMock implements HSClient {
 	}
 
 	@Override
-	public void panCamera(String direction, String camid) throws HSClientException {
+	public void panCamera(CameraPan direction, String camid) throws HSClientException {
 		// TODO Auto-generated method stub
 	}
 

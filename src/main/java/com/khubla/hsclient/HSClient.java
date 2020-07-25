@@ -238,7 +238,7 @@ public interface HSClient extends Closeable {
 	 * @param camid camera id
 	 * @throws HSClientException
 	 */
-	void panCamera(String direction, String camid) throws HSClientException;
+	void panCamera(CameraPan direction, String camid) throws HSClientException;
 
 	/**
 	 * execute plugin function

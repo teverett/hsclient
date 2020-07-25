@@ -86,7 +86,11 @@ public class HSClientImpl implements HSClient {
 
 	@Override
 	public void getCameraSnapshot(String camid) throws HSClientException {
-		throw new HSClientException("Not Implemented");
+		if (null != hsJSONClient) {
+			hsJSONClient.getCameraSnapshot(camid);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override
@@ -413,8 +417,12 @@ public class HSClientImpl implements HSClient {
 	}
 
 	@Override
-	public void panCamera(String direction, String camid) throws HSClientException {
-		throw new HSClientException("Not Implemented");
+	public void panCamera(CameraPan direction, String camid) throws HSClientException {
+		if (null != hsJSONClient) {
+			hsJSONClient.panCamera(direction, camid);
+		} else {
+			throw new HSClientException(NOT_CONNECTED);
+		}
 	}
 
 	@Override

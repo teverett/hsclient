@@ -145,7 +145,7 @@ public class HSJSONClient implements Closeable {
 				}
 			}
 			final HttpGet request = new HttpGet(builder.build());
-			System.out.println(request.toString());
+			// System.out.println(request.toString());
 			final CloseableHttpResponse response = httpClient.execute(request);
 			try {
 				final HttpEntity entity = response.getEntity();
@@ -172,6 +172,12 @@ public class HSJSONClient implements Closeable {
 			logger.error("Query getcameras returned HTTP " + httpResponse.getHttpCode());
 		}
 		return null;
+	}
+
+	public void getCameraSnapshot(String camid) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("camid", camid);
+		executeGETQuery("getcamerasnapshot", parameters);
 	}
 
 	public ChangedDevicesResponse getChangedDevices() throws HSClientException {
@@ -348,6 +354,13 @@ public class HSJSONClient implements Closeable {
 
 	public boolean isPassCredentialsAsHTTPParameters() {
 		return passCredentialsAsHTTPParameters;
+	}
+
+	public void panCamera(CameraPan direction, String camid) throws HSClientException {
+		final Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("direction", direction.toString());
+		parameters.put("camid", camid);
+		executeGETQuery("pancamera", parameters);
 	}
 
 	public String pluginfunction(String functionName, String plugin, String instance, Map<String, String> parameters) throws HSClientException {
