@@ -29,7 +29,7 @@ hsclient is distributed under the BSD 3-Clause License.
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.12</version>
+   <version>1.13</version>
 </dependency>
 ```
 
@@ -53,8 +53,9 @@ try {
 To get all Events:
 
 ```java
+HSConfiguration hsConfiguration = new HSConfiguration(URL, USERNAME, PASSWORD);
 final HSClient hsClient = new HSClientImpl();
-hsclient.connect(URL, USERNAME, PASSWORD);
+hsclient.connect(hsConfiguration);
 try {
    final Map<Integer, Event> allEvents = hsClient.getEventsById();
 } finally {
@@ -65,8 +66,9 @@ try {
 To get a single Device:
 
 ```java
+HSConfiguration hsConfiguration = new HSConfiguration(URL, USERNAME, PASSWORD);
 final HSClient hsClient = new HSClientImpl();
-hsclient.connect(URL, USERNAME, PASSWORD);
+hsclient.connect(hsConfiguration);
 try {
    final Device device = hsClient.getDevice(DEVICEREF);
 } finally {
@@ -77,4 +79,14 @@ try {
 ### Using the poller
 
 hsClient includes a multithreaded poller which calls a callback interface. To use the poller, provide an implementation of `DataPointCallback` to the class `Poller`.
+
+In hsClient V1.13+, the poller uses the "getdeviceschanged" API for more efficient polling
+
+Example polling:
+
+```java
+HSConfiguration hsConfiguration = new HSConfiguration(URL, USERNAME, PASSWORD);
+Poller poller = new Poller(hsConfiguration, POLLINTERVAL_MS, MY_DATAPOINTCALLBACK, THREADCOUNT);
+poller.run();
+```
 

@@ -35,12 +35,6 @@ public class ZWavePluginImpl implements ZWavePlugin {
 		this.hsConfiguration = hsConfiguration;
 	}
 
-	/**
-	 * get zwave interfaces
-	 *
-	 * @return interfaces
-	 * @throws HSClientException
-	 */
 	@Override
 	public List<Interface> getInterfaces() throws HSClientException {
 		HSClient hsClient = null;

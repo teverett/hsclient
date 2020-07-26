@@ -7,7 +7,6 @@ import java.util.concurrent.*;
 import org.slf4j.*;
 
 import com.khubla.hsclient.*;
-import com.khubla.hsclient.domain.*;
 
 /**
  * @author Tom Everett
@@ -27,7 +26,7 @@ public class Poller {
 	/**
 	 * poll interval (minutes)
 	 */
-	private final int pollInterval;
+	private final int pollIntervalms;
 	/**
 	 * callback
 	 */
@@ -37,79 +36,82 @@ public class Poller {
 	 */
 	private final int threads;
 
-	public Poller(HSConfiguration hsConfiguration, int pollInterval, DataPointCallback dataPointCallback, int threads) {
+	public Poller(HSConfiguration hsConfiguration, int pollIntervalms, DataPointCallback dataPointCallback, int threads) {
 		super();
 		this.hsConfiguration = hsConfiguration;
-		this.pollInterval = pollInterval;
+		this.pollIntervalms = pollIntervalms;
 		this.dataPointCallback = dataPointCallback;
 		this.threads = threads;
 	}
 
 	public void run() throws HSClientException, InterruptedException, IOException {
-		Map<Integer, Device> devices = null;
-		HSClient hsClient = null;
-		try {
-			/*
-			 * get devices
-			 */
-			hsClient = new HSClientImpl();
-			hsClient.connect(hsConfiguration);
-			devices = hsClient.getDevicesByRef();
-		} catch (final Exception e) {
-			logger.error("Error getting devices from HomeSeer", e);
-		} finally {
-			if (null != hsClient) {
-				hsClient.close();
-			}
-		}
 		/*
 		 * spin
 		 */
-		if (devices != null) {
-			while (true) {
-				try {
-					dataPointCallback.beginUpdate();
-					final long start = System.currentTimeMillis();
-					/*
-					 * thread pool
-					 */
-					final ExecutorService executorService = Executors.newFixedThreadPool(threads);
-					/*
-					 * walk devices
-					 */
-					for (final Integer ref : devices.keySet()) {
+		while (true) {
+			HSClient hsClient = null;
+			try {
+				/*
+				 * get devices which have changed since last check
+				 */
+				hsClient = new HSClientImpl();
+				hsClient.connect(hsConfiguration);
+				final List<Integer> changedDevices = hsClient.getChangedDevices();
+				if ((changedDevices != null) && (changedDevices.size() > 0)) {
+					try {
+						dataPointCallback.beginUpdate();
+						final long startTimeMS = System.currentTimeMillis();
 						/*
-						 * runnable
+						 * thread pool
 						 */
-						final Runnable worker = new PollerWorker(ref, hsConfiguration, dataPointCallback);
+						final ExecutorService executorService = Executors.newFixedThreadPool(threads);
 						/*
-						 * add to service
+						 * walk devices
 						 */
-						executorService.execute(worker);
+						for (final Integer ref : changedDevices) {
+							/*
+							 * runnable
+							 */
+							final Runnable worker = new PollerWorker(ref, hsConfiguration, dataPointCallback);
+							/*
+							 * add to service
+							 */
+							executorService.execute(worker);
+						}
+						/*
+						 * wait
+						 */
+						executorService.shutdown();
+						executorService.awaitTermination(60, TimeUnit.SECONDS);
+						/*
+						 * log the time
+						 */
+						final long elapsedTimesMS = System.currentTimeMillis() - startTimeMS;
+						/*
+						 * done
+						 */
+						dataPointCallback.endUpdate(elapsedTimesMS);
+						/*
+						 * log
+						 */
+						logger.info("Data collection performed in " + Long.toString(elapsedTimesMS) + " ms on " + threads + " threads");
+						/*
+						 * nap time
+						 */
+						if (elapsedTimesMS < pollIntervalms) {
+							Thread.sleep(pollIntervalms - elapsedTimesMS);
+						} else {
+							logger.warn("Data collection time of " + Long.toString(elapsedTimesMS) + " ms is longer than poll interval of " + pollIntervalms + " ms");
+						}
+					} catch (final Exception e) {
+						logger.error("Error polling", e);
 					}
-					/*
-					 * wait
-					 */
-					executorService.shutdown();
-					executorService.awaitTermination(60, TimeUnit.SECONDS);
-					/*
-					 * log the time
-					 */
-					final long t = System.currentTimeMillis() - start;
-					/*
-					 * done
-					 */
-					dataPointCallback.endUpdate(t);
-					/*
-					 * log
-					 */
-					logger.info("Data collection performed in " + Long.toString(t) + " ms on " + threads + " threads");
-					/*
-					 * nap time
-					 */
-					Thread.sleep((pollInterval * 60 * 1000) - t);
-				} catch (final Exception e) {
-					logger.error("Error polling", e);
+				}
+			} catch (final Exception e) {
+				logger.error("Error communicating to HomeSeer", e);
+			} finally {
+				if (null != hsClient) {
+					hsClient.close();
 				}
 			}
 		}

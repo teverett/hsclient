@@ -18,14 +18,14 @@ public interface ZWavePlugin {
 	 * get Z-Wave networks
 	 *
 	 * @return networks
-	 * @throws HSClientException
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	List<Network> getNetworks() throws HSClientException;
 
 	/**
 	 * get info on all Z-Wave nodes
 	 *
-	 * @param interfaceId
+	 * @param interfaceId id of the interface
 	 * @return list of Z-Wave Node objects
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -34,7 +34,7 @@ public interface ZWavePlugin {
 	/**
 	 * get interface status
 	 *
-	 * @param interfaceId
+	 * @param interfaceId id of the interface
 	 * @return stsatus string for interface
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -43,7 +43,7 @@ public interface ZWavePlugin {
 	/**
 	 * Check if interface is running
 	 *
-	 * @param interfaceId
+	 * @param interfaceId id of the interface
 	 * @return true of interface is running
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -52,8 +52,8 @@ public interface ZWavePlugin {
 	/**
 	 * Remove node
 	 *
-	 * @param nodeNum
-	 * @param interfaceId
+	 * @param nodeNum node number
+	 * @param interfaceId id of the interface
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	void removeNode(String nodeNum, String interfaceId) throws HSClientException;

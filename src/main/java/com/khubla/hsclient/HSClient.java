@@ -43,13 +43,14 @@ public interface HSClient extends Closeable {
 
 	/**
 	 * @return List of cameras
-	 * @throws HSClientExceptio Exception encountered communicating with HomeSeern
+	 * @throws HSClientException Exception encountered communicating with HomeSeern
 	 */
 	List<Camera> getCameras() throws HSClientException;
 
 	/**
 	 * get camera snapshot
 	 *
+	 * @return Base64 encoded image
 	 * @param camid camera id
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -64,7 +65,8 @@ public interface HSClient extends Closeable {
 	/**
 	 * gets the subdevice of current device by value of "getDevice_SubType_Description"
 	 *
-	 * @param deviceType
+	 * @param device parent device
+	 * @param deviceType device type string
 	 * @return device or null
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -156,7 +158,7 @@ public interface HSClient extends Closeable {
 	 * get image
 	 *
 	 * @param path Image path
-	 * @return
+	 * @return base64 encoded image
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	String getImage(String path) throws HSClientException;
@@ -184,7 +186,7 @@ public interface HSClient extends Closeable {
 	List<Plugin> getPlugins() throws HSClientException;
 
 	/**
-	 * @param pluginName
+	 * @param pluginName name of plugin
 	 * @return plugin version number
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
@@ -243,6 +245,7 @@ public interface HSClient extends Closeable {
 	/**
 	 * execute plugin function
 	 *
+	 * @return JSON string
 	 * @param functionName function name
 	 * @param plugin plugin name
 	 * @param instance plugin instance
@@ -254,6 +257,7 @@ public interface HSClient extends Closeable {
 	/**
 	 * register HS
 	 *
+	 * @return true if successful
 	 * @param license License
 	 * @param password password
 	 * @param licenseold old license id
@@ -291,6 +295,7 @@ public interface HSClient extends Closeable {
 	/**
 	 * update plugin
 	 *
+	 * @return true if successful
 	 * @param pluginName
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
