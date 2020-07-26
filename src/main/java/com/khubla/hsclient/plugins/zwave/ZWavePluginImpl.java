@@ -90,6 +90,20 @@ public class ZWavePluginImpl implements ZWavePlugin {
 	}
 
 	@Override
+	public List<Node> getNodeInfo() throws HSClientException {
+		final List<Interface> interfaces = getInterfaces();
+		if (null != interfaces) {
+			final List<Node> ret = new ArrayList<Node>();
+			for (final Interface interf : interfaces) {
+				final List<Node> nodes = this.getNodeInfo(interf.getUnique());
+				ret.addAll(nodes);
+			}
+			return ret;
+		}
+		return null;
+	}
+
+	@Override
 	public List<Node> getNodeInfo(String interfaceId) throws HSClientException {
 		HSClient hsClient = null;
 		try {

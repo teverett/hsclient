@@ -23,6 +23,14 @@ public interface ZWavePlugin {
 	List<Network> getNetworks() throws HSClientException;
 
 	/**
+	 * get node info for all interfaces
+	 *
+	 * @return list of Node
+	 * @throws HSClientException Exception encountered communicating with HomeSeer
+	 */
+	List<Node> getNodeInfo() throws HSClientException;
+
+	/**
 	 * get info on all Z-Wave nodes
 	 *
 	 * @param interfaceId
