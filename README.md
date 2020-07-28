@@ -29,7 +29,7 @@ hsclient is distributed under the BSD 3-Clause License.
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.13</version>
+   <version>1.14</version>
 </dependency>
 ```
 
@@ -80,7 +80,7 @@ try {
 
 hsClient includes a multithreaded poller which calls a callback interface. To use the poller, provide an implementation of `DataPointCallback` to the class `Poller`.
 
-In hsClient V1.13+, the poller uses the "getdeviceschanged" API for more efficient polling
+In hsClient V1.13+, the poller uses the "getdeviceschanged" API for more efficient polling.  The poller can be configured to only send data when device values change, or can be configured to send data for all devices on every polling cycle.
 
 Example polling:
 

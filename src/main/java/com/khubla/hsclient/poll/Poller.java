@@ -7,6 +7,7 @@ import java.util.concurrent.*;
 import org.slf4j.*;
 
 import com.khubla.hsclient.*;
+import com.khubla.hsclient.domain.*;
 
 /**
  * @author Tom Everett
@@ -35,13 +36,31 @@ public class Poller {
 	 * threads
 	 */
 	private final int threads;
+	/**
+	 * changes only
+	 */
+	private final boolean changesOnly;
 
-	public Poller(HSConfiguration hsConfiguration, int pollIntervalms, DataPointCallback dataPointCallback, int threads) {
+	/**
+	 * create a poller
+	 *
+	 * @param hsConfiguration HomeSeer URL and authentication info
+	 * @param pollIntervalms polling interval, milliseconds
+	 * @param dataPointCallback callback interface
+	 * @param threads number of threads to use to request changed data from HomeSeer
+	 * @param changesOnly if true: only calll the callback with changes. If false: call the callback with every data point on every poll interval
+	 */
+	public Poller(HSConfiguration hsConfiguration, int pollIntervalms, DataPointCallback dataPointCallback, int threads, boolean changesOnly) {
 		super();
 		this.hsConfiguration = hsConfiguration;
 		this.pollIntervalms = pollIntervalms;
 		this.dataPointCallback = dataPointCallback;
+		this.changesOnly = changesOnly;
 		this.threads = threads;
+	}
+
+	public boolean isChangesOnly() {
+		return changesOnly;
 	}
 
 	public void run() throws HSClientException, InterruptedException, IOException {
@@ -49,15 +68,41 @@ public class Poller {
 		 * spin
 		 */
 		while (true) {
+			/*
+			 * collect devices to query, then close the HomeSeer connection to avoid holding it open
+			 */
 			HSClient hsClient = null;
+			hsClient = new HSClientImpl();
+			hsClient.connect(hsConfiguration);
+			List<Integer> deviceIDsToQuery = null;
 			try {
-				/*
-				 * get devices which have changed since last check
-				 */
-				hsClient = new HSClientImpl();
-				hsClient.connect(hsConfiguration);
-				final List<Integer> changedDevices = hsClient.getChangedDevices();
-				if ((changedDevices != null) && (changedDevices.size() > 0)) {
+				if (changesOnly) {
+					/*
+					 * get devices which have changed since last check
+					 */
+					deviceIDsToQuery = hsClient.getChangedDevices();
+				} else {
+					/*
+					 * get all devices
+					 */
+					final Map<Integer, Device> allDevices = hsClient.getDevicesByRef();
+					if (null != allDevices) {
+						deviceIDsToQuery = new ArrayList<Integer>();
+						deviceIDsToQuery.addAll(allDevices.keySet());
+					}
+				}
+			} catch (final Exception e) {
+				logger.error("Error communicating to HomeSeer", e);
+			} finally {
+				if (null != hsClient) {
+					hsClient.close();
+				}
+			}
+			/*
+			 * query devices
+			 */
+			try {
+				if ((deviceIDsToQuery != null) && (deviceIDsToQuery.size() > 0)) {
 					try {
 						dataPointCallback.beginUpdate();
 						final long startTimeMS = System.currentTimeMillis();
@@ -68,7 +113,7 @@ public class Poller {
 						/*
 						 * walk devices
 						 */
-						for (final Integer ref : changedDevices) {
+						for (final Integer ref : deviceIDsToQuery) {
 							/*
 							 * runnable
 							 */
@@ -109,10 +154,6 @@ public class Poller {
 				}
 			} catch (final Exception e) {
 				logger.error("Error communicating to HomeSeer", e);
-			} finally {
-				if (null != hsClient) {
-					hsClient.close();
-				}
 			}
 		}
 	}
