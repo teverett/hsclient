@@ -86,7 +86,7 @@ Example polling:
 
 ```java
 HSConfiguration hsConfiguration = new HSConfiguration(URL, USERNAME, PASSWORD);
-Poller poller = new Poller(hsConfiguration, POLLINTERVAL_MS, MY_DATAPOINTCALLBACK, THREADCOUNT);
+Poller poller = new Poller(hsConfiguration, POLLINTERVAL_MS, MY_DATAPOINTCALLBACK, THREADCOUNT, true);
 poller.run();
 ```
 
