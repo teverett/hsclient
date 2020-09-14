@@ -11,7 +11,7 @@
 		<required-maven-version>3.3.1</required-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<logback.version>1.2.3</logback.version>
-		<dependency-check-maven.version>6.0.0</dependency-check-maven.version>
+		<dependency-check-maven.version>6.0.1</dependency-check-maven.version>
 	</properties>
 	<developers>
 		<developer>
