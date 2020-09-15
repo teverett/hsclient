@@ -11,7 +11,7 @@ The java interface API for hsClient is here [HSClient.java](https://github.com/t
 
 Versions 1.12+ of hsClient also have client support for the Z-Wave plugin API [here](https://github.com/teverett/hsclient/blob/master/src/main/java/com/khubla/hsclient/plugins/zwave/ZWavePlugin.java)
 
-The client was built based on [this pdf](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and [this documentation](https://help.homeseer.com/help/HS3SDK/static/default.htm#.controlling_with_json)
+The client was built based on [this pdf](https://homeseer.com/support/homeseer/HS3/hs3sdk.pdf) and [this documentation](https://docs.homeseer.com/display/HSPI/JSON+API)
 
 HomeSeer versions hsClient was tested against include:
 
