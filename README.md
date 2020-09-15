@@ -19,6 +19,13 @@ HomeSeer versions hsClient was tested against include:
 * HS3 Pro (SEL) Edition 3.0.0.548
 * HS3 Pro (SEL) Edition 3.0.0.550
 
+hsClient is one of numerous HomeSeer support applications created by khubla.com, including
+
+* [hsClient](https://github.com/teverett/hsclient)
+* [hsInflux](https://github.com/teverett/hsinflux)
+* [hsMQTT](https://github.com/teverett/hsOpenAPI)
+* [hsOpenAPI](https://github.com/teverett/hsOpenAPI)
+
 ## License
 
 hsclient is distributed under the BSD 3-Clause License.
