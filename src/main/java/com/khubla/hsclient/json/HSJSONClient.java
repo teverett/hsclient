@@ -70,9 +70,9 @@ public class HSJSONClient implements Closeable {
 	 */
 	private static final String REQUEST = "request";
 	/**
-	 * pass username and password as http parameters
+	 * myhs server
 	 */
-	private boolean passCredentialsAsHTTPParameters = false;
+	private static final String MY_HS = "http://myhs.homeseer.com/json/";
 	/**
 	 * HS URL
 	 */
@@ -132,20 +132,20 @@ public class HSJSONClient implements Closeable {
 		return null;
 	}
 
-	private HTTPResponse executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
+	private HTTPResponse executeGETQuery(String serverUrl, boolean passCredentialsAsHTTPParameters, String command, Map<String, String> parameters) throws HSClientException {
 		try {
-			final URIBuilder builder = new URIBuilder(url);
+			final URIBuilder builder = new URIBuilder(serverUrl);
+			builder.addParameter(REQUEST, command);
 			if (true == passCredentialsAsHTTPParameters) {
 				builder.setParameter(USER, username).setParameter(PASS, password);
 			}
-			builder.addParameter(REQUEST, command);
 			if (null != parameters) {
 				for (final String k : parameters.keySet()) {
 					builder.setParameter(k, parameters.get(k));
 				}
 			}
 			final HttpGet request = new HttpGet(builder.build());
-			// System.out.println(request.toString());
+			logger.debug(request.toString());
 			final CloseableHttpResponse response = httpClient.execute(request);
 			try {
 				final HttpEntity entity = response.getEntity();
@@ -162,6 +162,10 @@ public class HSJSONClient implements Closeable {
 			logger.error("Exception running command '" + command + "'", e);
 			throw new HSClientException("Exception running command '" + command + "'", e);
 		}
+	}
+
+	private HTTPResponse executeGETQuery(String command, Map<String, String> parameters) throws HSClientException {
+		return executeGETQuery(url, false, command, parameters);
 	}
 
 	public CamerasResponse getCameras() throws HSClientException {
@@ -353,7 +357,7 @@ public class HSJSONClient implements Closeable {
 	}
 
 	public SystemsResponse getSystems() throws HSClientException {
-		final HTTPResponse httpResponse = executeGETQuery("getsystems", null);
+		final HTTPResponse httpResponse = executeGETQuery(MY_HS, true, "getsystems", null);
 		if (httpResponse.getHttpCode() == HttpStatus.SC_OK) {
 			return SystemsResponse.parse(httpResponse.getHttpEntity());
 		} else {
@@ -368,10 +372,6 @@ public class HSJSONClient implements Closeable {
 
 	public String getUsername() {
 		return username;
-	}
-
-	public boolean isPassCredentialsAsHTTPParameters() {
-		return passCredentialsAsHTTPParameters;
 	}
 
 	public void panCamera(CameraPan direction, String camid) throws HSClientException {
@@ -430,10 +430,6 @@ public class HSJSONClient implements Closeable {
 
 	public void setHttpClient(CloseableHttpClient httpClient) {
 		this.httpClient = httpClient;
-	}
-
-	public void setPassCredentialsAsHTTPParameters(boolean passCredentialsAsHTTPParameters) {
-		this.passCredentialsAsHTTPParameters = passCredentialsAsHTTPParameters;
 	}
 
 	public void speak(String phrase, String host) throws HSClientException {
