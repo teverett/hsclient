@@ -29,6 +29,8 @@ public class StatusResponse {
 	private String version;
 	@JsonProperty("Devices")
 	private List<Device> devices;
+	@JsonProperty("TempFormatF")
+	private Boolean tempFormat;
 
 	public List<Device> getDevices() {
 		return devices;
@@ -36,6 +38,10 @@ public class StatusResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public Boolean getTempFormat() {
+		return tempFormat;
 	}
 
 	public String getVersion() {
@@ -48,6 +54,10 @@ public class StatusResponse {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setTempFormat(Boolean tempFormat) {
+		this.tempFormat = tempFormat;
 	}
 
 	public void setVersion(String version) {

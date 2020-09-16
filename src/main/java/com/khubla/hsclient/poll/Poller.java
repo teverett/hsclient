@@ -48,7 +48,8 @@ public class Poller {
 	 * @param pollIntervalms polling interval, milliseconds
 	 * @param dataPointCallback callback interface
 	 * @param threads number of threads to use to request changed data from HomeSeer
-	 * @param changesOnly if true: only calll the callback with changes. If false: call the callback with every data point on every poll interval
+	 * @param changesOnly if true: only calll the callback with changes. If false: call the callback
+	 *        with every data point on every poll interval
 	 */
 	public Poller(HSConfiguration hsConfiguration, int pollIntervalms, DataPointCallback dataPointCallback, int threads, boolean changesOnly) {
 		super();
