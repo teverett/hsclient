@@ -15,7 +15,7 @@ The client was built based on [this pdf](https://homeseer.com/support/homeseer/H
 
 HomeSeer versions hsClient was tested against include:
 
-* HS4 version 4.1.2.0
+* HS4 version 4.1.2.0+
 * HS3 Pro (SEL) Edition 3.0.0.548
 * HS3 Pro (SEL) Edition 3.0.0.550
 
@@ -36,7 +36,7 @@ hsclient is distributed under the BSD 3-Clause License.
 <dependency>
    <groupId>com.khubla.hsclient</groupId>
    <artifactId>hsclient</artifactId>
-   <version>1.14</version>
+   <version>1.16</version>
 </dependency>
 ```
 
