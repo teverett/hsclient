@@ -11,7 +11,6 @@
 		<required-maven-version>3.3.1</required-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<logback.version>1.2.3</logback.version>
-		<dependency-check-maven.version>6.0.2</dependency-check-maven.version>
 	</properties>
 	<developers>
 		<developer>
@@ -154,28 +153,6 @@
 								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>owasp-check</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.owasp</groupId>
-						<artifactId>dependency-check-maven</artifactId>
-						<version>${dependency-check-maven.version}</version>
-						<configuration>
-							<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>check</goal>
 								</goals>
 							</execution>
 						</executions>
