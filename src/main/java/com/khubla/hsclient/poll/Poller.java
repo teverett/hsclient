@@ -27,7 +27,7 @@ public class Poller {
 	/**
 	 * poll interval (minutes)
 	 */
-	private final int pollIntervalms;
+	private final int pollIntervalmin;
 	/**
 	 * callback
 	 */
@@ -45,16 +45,16 @@ public class Poller {
 	 * create a poller
 	 *
 	 * @param hsConfiguration HomeSeer URL and authentication info
-	 * @param pollIntervalms polling interval, milliseconds
+	 * @param pollIntervalms polling interval, minutes
 	 * @param dataPointCallback callback interface
 	 * @param threads number of threads to use to request changed data from HomeSeer
-	 * @param changesOnly if true: only calll the callback with changes. If false: call the callback
+	 * @param changesOnly if true: only call the callback with changes. If false: call the callback
 	 *        with every data point on every poll interval
 	 */
-	public Poller(HSConfiguration hsConfiguration, int pollIntervalms, DataPointCallback dataPointCallback, int threads, boolean changesOnly) {
+	public Poller(HSConfiguration hsConfiguration, int pollIntervalmin, DataPointCallback dataPointCallback, int threads, boolean changesOnly) {
 		super();
 		this.hsConfiguration = hsConfiguration;
-		this.pollIntervalms = pollIntervalms;
+		this.pollIntervalmin = pollIntervalmin;
 		this.dataPointCallback = dataPointCallback;
 		this.changesOnly = changesOnly;
 		this.threads = threads;
@@ -144,10 +144,10 @@ public class Poller {
 						/*
 						 * nap time
 						 */
-						if (elapsedTimesMS < pollIntervalms) {
-							Thread.sleep(pollIntervalms - elapsedTimesMS);
+						if (elapsedTimesMS < (pollIntervalmin * 1000)) {
+							Thread.sleep((pollIntervalmin * 1000) - elapsedTimesMS);
 						} else {
-							logger.warn("Data collection time of " + Long.toString(elapsedTimesMS) + " ms is longer than poll interval of " + pollIntervalms + " ms");
+							logger.warn("Data collection time of " + Long.toString(elapsedTimesMS) + " ms is longer than poll interval of " + (pollIntervalmin * 1000) + " ms");
 						}
 					} catch (final Exception e) {
 						logger.error("Error polling", e);
