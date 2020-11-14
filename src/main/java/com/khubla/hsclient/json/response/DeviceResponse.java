@@ -28,6 +28,17 @@ public class DeviceResponse {
 	private String name;
 	@JsonProperty("Version")
 	private String version;
+	@JsonProperty("TempFormatF")
+	private Boolean tempFormatF;
+
+	public Boolean getTempFormatF() {
+		return tempFormatF;
+	}
+
+	public void setTempFormatF(Boolean tempFormatF) {
+		this.tempFormatF = tempFormatF;
+	}
+
 	private String location;
 	private String location2;
 	@JsonProperty("Devices")
