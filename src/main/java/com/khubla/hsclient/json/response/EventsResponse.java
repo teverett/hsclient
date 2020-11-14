@@ -29,6 +29,8 @@ public class EventsResponse {
 	private String version;
 	@JsonProperty("Events")
 	private List<Event> events;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<Event> getEvents() {
 		return events;
@@ -36,6 +38,10 @@ public class EventsResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {

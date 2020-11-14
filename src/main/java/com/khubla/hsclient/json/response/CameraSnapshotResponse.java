@@ -28,6 +28,8 @@ public class CameraSnapshotResponse {
 	private String snapShot;
 	@JsonProperty("SupportsPanTilt")
 	private Boolean supportsPanTilt;
+	@JsonProperty("Response")
+	private String response;
 
 	public String getId() {
 		return id;
@@ -35,6 +37,10 @@ public class CameraSnapshotResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getSnapShot() {

@@ -1,8 +1,10 @@
 package com.khubla.hsclient;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import com.khubla.hsclient.domain.*;
 
@@ -14,17 +16,17 @@ import com.khubla.hsclient.domain.*;
  */
 public class TestGetCounter extends AbstractTest {
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetCounter() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Counter counter = hsClient.getCounter("test");
-			Assert.assertNotNull(counter);
+			assertNotNull(counter);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();
@@ -39,10 +41,10 @@ public class TestGetCounter extends AbstractTest {
 			hsClient = new HSClientImplMock();
 			hsClient.connect(hsConfiguration);
 			final Counter counter = hsClient.getCounter("counter1");
-			Assert.assertNotNull(counter);
+			assertNotNull(counter);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();

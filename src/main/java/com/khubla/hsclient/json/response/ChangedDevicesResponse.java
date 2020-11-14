@@ -2,6 +2,7 @@ package com.khubla.hsclient.json.response;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.khubla.hsclient.*;
 
@@ -22,9 +23,15 @@ public class ChangedDevicesResponse {
 	}
 
 	private List<Integer> refs;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<Integer> getRefs() {
 		return refs;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public void setRefs(List<Integer> refs) {

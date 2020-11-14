@@ -22,6 +22,12 @@ public class SettingResponse {
 
 	@JsonProperty("Value")
 	private String value;
+	@JsonProperty("Response")
+	private String response;
+
+	public String getResponse() {
+		return response;
+	}
 
 	public String getValue() {
 		return value;

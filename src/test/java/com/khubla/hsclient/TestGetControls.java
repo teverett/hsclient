@@ -1,6 +1,8 @@
 package com.khubla.hsclient;
 
-import org.junit.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.*;
 
 /**
  * @author Tom Everett
@@ -9,8 +11,8 @@ import org.junit.*;
  *         </p>
  */
 public class TestGetControls extends AbstractTest {
-	@Test
-	@Ignore
+	@Test()
+	@Disabled
 	public void testGetControls() {
 		HSClient hsClient = null;
 		try {
@@ -20,7 +22,7 @@ public class TestGetControls extends AbstractTest {
 			// Assert.assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 }

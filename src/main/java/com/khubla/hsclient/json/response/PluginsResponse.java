@@ -29,6 +29,8 @@ public class PluginsResponse {
 	private String version;
 	@JsonProperty("Plugins")
 	private List<Plugin> plugins;
+	@JsonProperty("Response")
+	private String response;
 
 	public String getName() {
 		return name;
@@ -36,6 +38,10 @@ public class PluginsResponse {
 
 	public List<Plugin> getPlugins() {
 		return plugins;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {

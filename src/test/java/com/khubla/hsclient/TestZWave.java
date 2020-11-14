@@ -1,8 +1,10 @@
 package com.khubla.hsclient;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import com.khubla.hsclient.plugins.zwave.*;
 import com.khubla.hsclient.plugins.zwave.domain.*;
@@ -15,66 +17,66 @@ import com.khubla.hsclient.plugins.zwave.domain.*;
  */
 public class TestZWave extends AbstractTest {
 	@Test
-	@Ignore
+	@Disabled
 	public void testInterfaces() {
 		try {
 			ZWavePlugin zWavePlugin = new ZWavePluginImpl(hsConfiguration);
 			List<Interface> interfaces = zWavePlugin.getInterfaces();
-			Assert.assertNotNull(interfaces);
-			Assert.assertTrue(interfaces.size() > 0);
+			assertNotNull(interfaces);
+			assertTrue(interfaces.size() > 0);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testNetworks() {
 		try {
 			ZWavePlugin zWavePlugin = new ZWavePluginImpl(hsConfiguration);
 			List<Network> networks = zWavePlugin.getNetworks();
-			Assert.assertNotNull(networks);
-			Assert.assertTrue(networks.size() > 0);
+			assertNotNull(networks);
+			assertTrue(networks.size() > 0);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testNodes() {
 		try {
 			ZWavePlugin zWavePlugin = new ZWavePluginImpl(hsConfiguration);
 			List<Interface> interfaces = zWavePlugin.getInterfaces();
 			List<Node> nodes = zWavePlugin.getNodeInfo(interfaces.get(0).getUnique());
-			Assert.assertNotNull(nodes);
-			Assert.assertTrue(nodes.size() > 0);
+			assertNotNull(nodes);
+			assertTrue(nodes.size() > 0);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testStatus() {
 		try {
 			ZWavePlugin zWavePlugin = new ZWavePluginImpl(hsConfiguration);
 			List<Interface> interfaces = zWavePlugin.getInterfaces();
 			zWavePlugin.getStatus(interfaces.get(0).getUnique());
 			List<Node> nodes = zWavePlugin.getNodeInfo(interfaces.get(0).getUnique());
-			Assert.assertNotNull(nodes);
-			Assert.assertTrue(nodes.size() > 0);
+			assertNotNull(nodes);
+			assertTrue(nodes.size() > 0);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testIsRunning() {
 		try {
 			ZWavePlugin zWavePlugin = new ZWavePluginImpl(hsConfiguration);
@@ -82,7 +84,7 @@ public class TestZWave extends AbstractTest {
 			zWavePlugin.isRunning(interfaces.get(0).getUnique());
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 }

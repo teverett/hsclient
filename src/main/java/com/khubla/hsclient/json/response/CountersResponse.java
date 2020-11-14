@@ -29,6 +29,8 @@ public class CountersResponse {
 	private String version;
 	@JsonProperty("Counters")
 	private List<Counter> counters;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<Counter> getCounters() {
 		return counters;
@@ -36,6 +38,10 @@ public class CountersResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {
@@ -48,6 +54,10 @@ public class CountersResponse {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
 	}
 
 	public void setVersion(String version) {

@@ -31,6 +31,8 @@ public class StatusResponse {
 	private List<Device> devices;
 	@JsonProperty("TempFormatF")
 	private Boolean tempFormat;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<Device> getDevices() {
 		return devices;
@@ -38,6 +40,10 @@ public class StatusResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public Boolean getTempFormat() {

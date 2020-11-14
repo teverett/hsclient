@@ -44,9 +44,11 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final DeviceResponse deviceResponse = hsJSONClient.controlDeviceByLabel(ref, label);
 			if (null != deviceResponse) {
-				final List<Device> devices = deviceResponse.getDevices();
-				if ((null != devices) && (devices.size() > 0)) {
-					return devices.get(0);
+				if (deviceResponse.getResponse() == null) {
+					final List<Device> devices = deviceResponse.getDevices();
+					if ((null != devices) && (devices.size() > 0)) {
+						return devices.get(0);
+					}
 				}
 			}
 			return null;
@@ -60,9 +62,11 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final DeviceResponse deviceResponse = hsJSONClient.controlDeviceByValue(ref, value);
 			if (null != deviceResponse) {
-				final List<Device> devices = deviceResponse.getDevices();
-				if ((null != devices) && (devices.size() > 0)) {
-					return devices.get(0);
+				if (deviceResponse.getResponse() == null) {
+					final List<Device> devices = deviceResponse.getDevices();
+					if ((null != devices) && (devices.size() > 0)) {
+						return devices.get(0);
+					}
 				}
 			}
 			return null;
@@ -76,7 +80,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final CamerasResponse camerasResponse = hsJSONClient.getCameras();
 			if (null != camerasResponse) {
-				return camerasResponse.getCameras();
+				if (camerasResponse.getResponse() == null) {
+					return camerasResponse.getCameras();
+				}
 			}
 			return null;
 		} else {
@@ -89,7 +95,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final CameraSnapshotResponse cameraSnapshotResponse = hsJSONClient.getCameraSnapshot(camid);
 			if (null != cameraSnapshotResponse) {
-				return cameraSnapshotResponse.getSnapShot();
+				if (cameraSnapshotResponse.getResponse() == null) {
+					return cameraSnapshotResponse.getSnapShot();
+				}
 			}
 			return null;
 		} else {
@@ -102,7 +110,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final ChangedDevicesResponse changedDevicesResponse = hsJSONClient.getChangedDevices();
 			if (null != changedDevicesResponse) {
-				return changedDevicesResponse.getRefs();
+				if (changedDevicesResponse.getResponse() == null) {
+					return changedDevicesResponse.getRefs();
+				}
 			}
 			return null;
 		} else {
@@ -162,8 +172,12 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final CountersResponse countersResponse = hsJSONClient.getCounter(name);
 			if (null != countersResponse) {
-				if (countersResponse.getCounters().size() > 0) {
-					return countersResponse.getCounters().get(0);
+				if (countersResponse.getResponse() == null) {
+					if (null != countersResponse.getResponse()) {
+						if (countersResponse.getCounters().size() > 0) {
+							return countersResponse.getCounters().get(0);
+						}
+					}
 				}
 			}
 			return null;
@@ -177,7 +191,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(ref, null, null);
 			if (null != statusResponse) {
-				return statusResponse.getDevices().get(0);
+				if (statusResponse.getResponse() == null) {
+					return statusResponse.getDevices().get(0);
+				}
 			}
 			return null;
 		} else {
@@ -190,7 +206,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final ControlResponse controlResponse = hsJSONClient.getControl(ref);
 			if (null != controlResponse) {
-				return controlResponse.getControlPairs();
+				if (controlResponse.getResponse() == null) {
+					return controlResponse.getControlPairs();
+				}
 			}
 			return null;
 		} else {
@@ -212,11 +230,13 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 			if (null != statusResponse) {
-				final Map<String, Device> ret = new HashMap<String, Device>();
-				for (final Device device : statusResponse.getDevices()) {
-					ret.put(device.getName(), device);
+				if (statusResponse.getResponse() == null) {
+					final Map<String, Device> ret = new HashMap<String, Device>();
+					for (final Device device : statusResponse.getDevices()) {
+						ret.put(device.getName(), device);
+					}
+					return ret;
 				}
-				return ret;
 			}
 			return null;
 		} else {
@@ -229,11 +249,13 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 			if (null != statusResponse) {
-				final Map<Integer, Device> ret = new HashMap<Integer, Device>();
-				for (final Device device : statusResponse.getDevices()) {
-					ret.put(device.getRef(), device);
+				if (statusResponse.getResponse() == null) {
+					final Map<Integer, Device> ret = new HashMap<Integer, Device>();
+					for (final Device device : statusResponse.getDevices()) {
+						ret.put(device.getRef(), device);
+					}
+					return ret;
 				}
-				return ret;
 			}
 			return null;
 		} else {
@@ -246,14 +268,16 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final EventsResponse eventsResponse = hsJSONClient.getEvents();
 			if (null != eventsResponse) {
-				final Map<String, Map<String, Event>> ret = new HashMap<String, Map<String, Event>>();
-				for (final Event event : eventsResponse.getEvents()) {
-					if (null == ret.get(event.getGroup())) {
-						ret.put(event.getGroup(), new HashMap<String, Event>());
+				if (eventsResponse.getResponse() == null) {
+					final Map<String, Map<String, Event>> ret = new HashMap<String, Map<String, Event>>();
+					for (final Event event : eventsResponse.getEvents()) {
+						if (null == ret.get(event.getGroup())) {
+							ret.put(event.getGroup(), new HashMap<String, Event>());
+						}
+						ret.get(event.getGroup()).put(event.getName(), event);
 					}
-					ret.get(event.getGroup()).put(event.getName(), event);
+					return ret;
 				}
-				return ret;
 			}
 			return null;
 		} else {
@@ -266,11 +290,13 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final EventsResponse eventsResponse = hsJSONClient.getEvents();
 			if (null != eventsResponse) {
-				final Map<Integer, Event> ret = new HashMap<Integer, Event>();
-				for (final Event event : eventsResponse.getEvents()) {
-					ret.put(event.getId(), event);
+				if (eventsResponse.getResponse() == null) {
+					final Map<Integer, Event> ret = new HashMap<Integer, Event>();
+					for (final Event event : eventsResponse.getEvents()) {
+						ret.put(event.getId(), event);
+					}
+					return ret;
 				}
-				return ret;
 			}
 			return null;
 		} else {
@@ -311,7 +337,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
 			if (null != locationsResponse) {
-				return locationsResponse.getLocation1();
+				if (locationsResponse.getResponse() == null) {
+					return locationsResponse.getLocation1();
+				}
 			}
 			return null;
 		} else {
@@ -324,7 +352,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final LocationsResponse locationsResponse = hsJSONClient.getLocations();
 			if (null != locationsResponse) {
-				return locationsResponse.getLocation2();
+				if (locationsResponse.getResponse() == null) {
+					return locationsResponse.getLocation2();
+				}
 			}
 			return null;
 		} else {
@@ -337,7 +367,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final PluginsResponse pluginsResponse = hsJSONClient.getPlugins();
 			if (null != pluginsResponse) {
-				return pluginsResponse.getPlugins();
+				if (pluginsResponse.getResponse() == null) {
+					return pluginsResponse.getPlugins();
+				}
 			}
 			return null;
 		} else {
@@ -396,7 +428,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final SettingResponse settingResponse = hsJSONClient.getSetting(name);
 			if (null != settingResponse) {
-				return settingResponse.getValue();
+				if (settingResponse.getResponse() == null) {
+					return settingResponse.getValue();
+				}
 			}
 			return null;
 		} else {
@@ -409,7 +443,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final SystemsResponse systemsResponse = hsJSONClient.getSystems();
 			if (null != systemsResponse) {
-				return systemsResponse.getSystems();
+				if (systemsResponse.getResponse() == null) {
+					return systemsResponse.getSystems();
+				}
 			}
 			return null;
 		} else {
@@ -422,7 +458,9 @@ public class HSClientImpl implements HSClient {
 		if (null != hsJSONClient) {
 			final StatusResponse statusResponse = hsJSONClient.getStatus(null, null, null);
 			if (null != statusResponse) {
-				return statusResponse.getVersion();
+				if (statusResponse.getResponse() == null) {
+					return statusResponse.getVersion();
+				}
 			}
 			return null;
 		} else {

@@ -30,6 +30,8 @@ public class LocationsResponse {
 	private List<String> location1;
 	@JsonProperty("location2")
 	private List<String> location2;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<String> getLocation1() {
 		return location1;
@@ -41,6 +43,10 @@ public class LocationsResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {

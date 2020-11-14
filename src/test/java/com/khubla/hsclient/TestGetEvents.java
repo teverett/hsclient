@@ -1,9 +1,11 @@
 package com.khubla.hsclient;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.*;
 import java.util.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import com.khubla.hsclient.domain.*;
 
@@ -15,17 +17,17 @@ import com.khubla.hsclient.domain.*;
  */
 public class TestGetEvents extends AbstractTest {
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetEventsById() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Map<Integer, Event> events = hsClient.getEventsById();
-			Assert.assertNotNull(events);
+			assertNotNull(events);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();
@@ -34,17 +36,17 @@ public class TestGetEvents extends AbstractTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetEventsByName() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Map<String, Map<String, Event>> events = hsClient.getEventsByGroup();
-			Assert.assertNotNull(events);
+			assertNotNull(events);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();

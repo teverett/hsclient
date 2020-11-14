@@ -34,6 +34,8 @@ public class ControlResponse {
 	private String location;
 	private String location2;
 	private String voice_command;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<ControlPair> getControlPairs() {
 		return controlPairs;
@@ -53,6 +55,10 @@ public class ControlResponse {
 
 	public String getRef() {
 		return ref;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {

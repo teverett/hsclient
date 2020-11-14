@@ -30,15 +30,8 @@ public class DeviceResponse {
 	private String version;
 	@JsonProperty("TempFormatF")
 	private Boolean tempFormatF;
-
-	public Boolean getTempFormatF() {
-		return tempFormatF;
-	}
-
-	public void setTempFormatF(Boolean tempFormatF) {
-		this.tempFormatF = tempFormatF;
-	}
-
+	@JsonProperty("Response")
+	private String response;
 	private String location;
 	private String location2;
 	@JsonProperty("Devices")
@@ -64,6 +57,14 @@ public class DeviceResponse {
 		return ref;
 	}
 
+	public String getResponse() {
+		return response;
+	}
+
+	public Boolean getTempFormatF() {
+		return tempFormatF;
+	}
+
 	public String getVersion() {
 		return version;
 	}
@@ -86,6 +87,10 @@ public class DeviceResponse {
 
 	public void setRef(String ref) {
 		this.ref = ref;
+	}
+
+	public void setTempFormatF(Boolean tempFormatF) {
+		this.tempFormatF = tempFormatF;
 	}
 
 	public void setVersion(String version) {

@@ -1,9 +1,11 @@
 package com.khubla.hsclient;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.*;
 import java.util.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import com.khubla.hsclient.domain.*;
 
@@ -15,17 +17,16 @@ import com.khubla.hsclient.domain.*;
  */
 public class TestGetDevices extends AbstractTest {
 	@Test
-	@Ignore
 	public void testGetByName() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Map<String, Device> devices = hsClient.getDevicesByName();
-			Assert.assertNotNull(devices);
+			assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();
@@ -34,17 +35,17 @@ public class TestGetDevices extends AbstractTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetByRef() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
-			Assert.assertNotNull(devices);
+			assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();
@@ -59,10 +60,10 @@ public class TestGetDevices extends AbstractTest {
 			hsClient = new HSClientImplMock();
 			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
-			Assert.assertNotNull(devices);
+			assertNotNull(devices);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();
@@ -71,20 +72,20 @@ public class TestGetDevices extends AbstractTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testShowDevices() throws IOException {
 		HSClient hsClient = null;
 		try {
 			hsClient = new HSClientImpl();
 			hsClient.connect(hsConfiguration);
 			final Map<Integer, Device> devices = hsClient.getDevicesByRef();
-			Assert.assertNotNull(devices);
+			assertNotNull(devices);
 			for (final Device device : devices.values()) {
 				System.out.println(device.getName() + ": " + device.getDevice_type().getDevice_Type() + " : " + device.getDevice_type().getDevice_Type_Description());
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		} finally {
 			if (null != hsClient) {
 				hsClient.close();

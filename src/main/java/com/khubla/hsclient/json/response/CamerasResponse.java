@@ -29,6 +29,8 @@ public class CamerasResponse {
 	private String version;
 	@JsonProperty("Cameras")
 	private List<Camera> cameras;
+	@JsonProperty("Response")
+	private String response;
 
 	public List<Camera> getCameras() {
 		return cameras;
@@ -36,6 +38,10 @@ public class CamerasResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getResponse() {
+		return response;
 	}
 
 	public String getVersion() {

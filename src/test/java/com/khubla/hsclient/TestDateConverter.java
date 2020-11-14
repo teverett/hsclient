@@ -1,8 +1,10 @@
 package com.khubla.hsclient;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import com.khubla.hsclient.domain.converter.*;
 
@@ -19,13 +21,13 @@ public class TestDateConverter {
 			String dateString = "/Date(1595133858051-0600)/";
 			DateConverter dateConverter = new DateConverter();
 			Date date = dateConverter.convert(dateString);
-			Assert.assertNotNull(date);
-			Assert.assertNotNull(date.getYear() == 2020);
-			Assert.assertNotNull(date.getMonth() == 7);
-			Assert.assertNotNull(date.getDay() == 25);
+			assertNotNull(date);
+			assertNotNull(date.getYear() == 2020);
+			assertNotNull(date.getMonth() == 7);
+			assertNotNull(date.getDay() == 25);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 
@@ -35,13 +37,13 @@ public class TestDateConverter {
 			String dateString = "/Date(1595635070772)/";
 			DateConverter dateConverter = new DateConverter();
 			Date date = dateConverter.convert(dateString);
-			Assert.assertNotNull(date);
-			Assert.assertNotNull(date.getYear() == 2020);
-			Assert.assertNotNull(date.getMonth() == 7);
-			Assert.assertNotNull(date.getDay() == 25);
+			assertNotNull(date);
+			assertNotNull(date.getYear() == 2020);
+			assertNotNull(date.getMonth() == 7);
+			assertNotNull(date.getDay() == 25);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Assert.fail();
+			fail();
 		}
 	}
 }
