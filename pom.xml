@@ -4,7 +4,7 @@
 	<artifactId>hsclient</artifactId>
 	<packaging>jar</packaging>
 	<name>khubla.com HomeSeer Client</name>
-	<version>1.17-SNAPSHOT</version>
+	<version>1.17</version>
 	<description>A Java Client for HomeSeer</description>
 	<properties>
 		<target.jvm>11</target.jvm>
@@ -140,7 +140,8 @@
 						</executions>
 						<configuration>
 							<!-- <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable> -->
-							<source>8</source>
+							<detectJavaApiLink>false</detectJavaApiLink>
+							<source>1.8</source>
 						</configuration>
 					</plugin>
 					<plugin>

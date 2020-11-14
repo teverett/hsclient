@@ -296,7 +296,7 @@ public interface HSClient extends Closeable {
 	 * update plugin
 	 *
 	 * @return true if successful
-	 * @param pluginName
+	 * @param pluginName name of plugin
 	 * @throws HSClientException Exception encountered communicating with HomeSeer
 	 */
 	boolean updatePlugin(String pluginName) throws HSClientException;

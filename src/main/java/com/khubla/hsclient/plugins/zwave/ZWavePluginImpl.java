@@ -59,8 +59,8 @@ public class ZWavePluginImpl implements ZWavePlugin {
 	/**
 	 * get zwave networks
 	 *
-	 * @return networks
-	 * @throws HSClientException
+	 * @return networks list of networks
+	 * @throws HSClientException exception
 	 */
 	@Override
 	public List<Network> getNetworks() throws HSClientException {
