@@ -45,7 +45,7 @@ public class Poller {
 	 * create a poller
 	 *
 	 * @param hsConfiguration HomeSeer URL and authentication info
-	 * @param pollIntervalms polling interval, minutes
+	 * @param pollIntervalmin polling interval, minutes
 	 * @param dataPointCallback callback interface
 	 * @param threads number of threads to use to request changed data from HomeSeer
 	 * @param changesOnly if true: only call the callback with changes. If false: call the callback

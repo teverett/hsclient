@@ -4,7 +4,7 @@
 	<artifactId>hsclient</artifactId>
 	<packaging>jar</packaging>
 	<name>khubla.com HomeSeer Client</name>
-	<version>1.18-SNAPSHOT</version>
+	<version>1.18</version>
 	<description>A Java Client for HomeSeer</description>
 	<properties>
 		<target.jvm>11</target.jvm>
@@ -75,8 +75,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>${target.jvm}</source>
-					<target>${target.jvm}</target>
+				    <release>${target.jvm}</release>
 				</configuration>
 			</plugin>
 			<plugin>
