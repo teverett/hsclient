@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<logback.version>1.2.11</logback.version>
 		<junit.version>5.8.2</junit.version>
-		<surefile.version>3.0.0-M5</surefile.version>
+		<surefile.version>3.0.0-M6</surefile.version>
 		<httpclient.version>4.5.13</httpclient.version>
 		<commons-io.version>2.11.0</commons-io.version>
 	</properties>
