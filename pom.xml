@@ -10,7 +10,7 @@
 		<target.jvm>11</target.jvm>
 		<required-maven-version>3.3.1</required-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<logback.version>1.4.7</logback.version>
+		<logback.version>1.4.11</logback.version>
 		<junit.version>5.9.3</junit.version>
 		<surefile.version>3.1.0</surefile.version>
 		<httpclient.version>4.5.14</httpclient.version>
